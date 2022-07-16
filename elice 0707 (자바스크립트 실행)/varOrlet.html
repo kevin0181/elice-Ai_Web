@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function varFor() {
+            for (var i = 0; i < 3; ++i) {
+               console.log("var i: ", i)
+            }
+        }
+        function letFor() {
+            for (let i = 0; i < 3; ++i) {
+                setTimeout(() => console.log("leti: ", i), 0);
+            }
+        }
+        varFor();
+        letFor();
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>시작</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h3 class="hi">안녕하세요</h3>
+    <h1>넵</h1>
+    <button onclick="getData()">버튼</button>
+</body>
+<script>
+    function getData() {
+        $.ajax({
+            method: "GET",
+            url: "http://localhost:8080/get/list",
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    }
+</script>
+
+</html>

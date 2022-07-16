@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+</body>
+<script>
+    let o = {
+        name: 'Daniel',
+
+        o2: {
+            f1: () => {
+                console.log("[f1] this : ", this);
+            },
+        },
+
+        f2: function () {
+            console.log("[f2] this : ", this);
+        }
+    }
+
+    o.o2.f1();
+    o.f2();
+</script>
+
+</html>

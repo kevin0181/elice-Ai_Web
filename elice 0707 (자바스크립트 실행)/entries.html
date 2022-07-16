@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    const object1 = {
+        a: 'hi',
+        b: 'hello'
+    };
+
+    for (const [key, value] of Object.entries(object1)) {
+        console.log(`${key}: ${value}`);
+    }
+
+    Object.entries(object1).map((value) => {
+        console.log(value);
+    });
+
+</script>
+</html>

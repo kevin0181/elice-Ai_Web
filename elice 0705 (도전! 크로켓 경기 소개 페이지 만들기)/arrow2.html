@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <input type="button" id="arrow" onclick="arrow()" value="화살표함수 클릭!">
+    <input type="button" id="addF" onclick="addF()" value="필드 추가">
+</body>
+<script>
+    let data = {
+        name: '유재석',
+        age: 50,
+    }
+
+    let arrow = () => {
+        console.log(data);
+    }
+
+    let addF = () => {
+        data.color = "blue";
+        console.log(data);
+    }
+</script>
+
+</html>

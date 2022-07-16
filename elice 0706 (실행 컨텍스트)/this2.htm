@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+</body>
+<script>
+
+    const cat1 = {
+        name: 'meow',
+        foo1: function () {
+            console.log(this); //meow
+            const foo2 = function () {
+                console.log(this); //window
+            }
+            foo2();
+        }
+    };
+
+    cat1.foo1();	// undefined
+
+    // const cat2 = {
+    //     name: 'meow',
+    //     foo1: function () {
+    //         console.log(this); //meow
+    //         const foo2 = () => {
+    //             console.log(this); //meow
+    //         }
+    //         foo2();
+    //     }
+    // };
+
+    // cat2.foo1();	// meow
+    
+
+    // 화살표 함수에는 this라는 변수 자체가 존재하지 않기 때문에
+    // 그 상위 환경에서의 this를 참조하게 됩니다.
+
+</script>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./../jquery-3.5.1.js"></script>
+</head>
+
+<body>
+    <p>식사</p><br>
+    <ul>
+        <li>치킨<input type="checkbox" class="menu" name="menu" value="치킨"></li>
+        <li>피자<input type="checkbox" class="menu" name="menu" value="피자"></li>
+        <li>족발<input type="checkbox" class="menu" name="menu" value="족발"></li>
+    </ul>
+    <button onclick="result()">결과보기</button><br>
+    결과값:<h1 id="result"></h1>
+</body>
+<script type="text/javascript">
+    function result() {
+        var arr = document.getElementsByName("menu");
+        document.querySelector("input[name='menu']");
+        var str = "";
+        for (var i = 0; i < arr.length; i++) {
+            var c = arr[i];
+            if (c.checked) {
+                str += c.value + "<br/>";
+            }
+        }
+        document.getElementById('result').innerHTML = str;
+    }
+
+    $(".menu").change(function () {
+        if (this.checked) {
+
+        }
+    });
+</script>
+
+</html>

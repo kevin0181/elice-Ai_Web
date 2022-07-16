@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+
+    <input type="text" id="finput"> + <input type="text" id="sinput"> =
+    <input type="text" id="result">
+    <input type="button" value="계산하기" id="btn">
+
+</body>
+<script>
+    var btn = document.getElementById("btn");
+
+    function plus() {
+
+        var fInput = document.getElementById("finput").value;
+        var sInput = document.getElementById("sinput").value;
+
+        var result = fInput + sInput;
+
+        console.log(result);
+
+        document.getElementById("result").value = result;
+    }
+
+    btn.addEventListener("click", plus);
+
+</script>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+</body>
+<script>
+    const o = {
+        name: "Kim",
+        changeMyName: function (name) { this.name = name },
+    };
+
+    const o2 = {
+        name: "Song",
+    };
+
+    function callFuncWithArg(f, arg) {
+        f(arg);
+    }
+
+    o.changeMyName("Sam");
+    console.log("3번 - ", o.name);
+</script>
+
+</html>

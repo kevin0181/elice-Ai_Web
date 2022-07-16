@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>123</title>
+</head>
+
+<body>
+    <span>함수형</span>
+    <input type="text" id="id1" onchange="getText1()">
+    <p id="getTextId1"></p>
+    <hr>
+    <span>이벤트리스너</span>
+    <input type="text" id="id2">
+    <p id="getTextId2"></p>
+</body>
+<script>
+    
+    function getText1() {  //=>함수형
+        var getId = document.getElementById("id1").value;
+        document.getElementById("getTextId1").innerHTML = getId;
+    }
+
+
+    // 이벤트 리스너
+    document.getElementById("id2").addEventListener("change", function () {
+        document.getElementById("getTextId2").innerHTML = this.value;
+    });
+
+</script>
+
+</html>

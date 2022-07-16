@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <input type="text" id="result" value="1">
+    <button id="up" onclick="up()">+</button>
+    <button id="down" onclick="down()">-</button>
+</body>
+<script type="text/javascript">
+    function up() {
+        var count = document.getElementById("result").value;
+        document.getElementById("result").value = parseInt(count) + 1;
+    }
+
+    function down() {
+        var count = document.getElementById("result").value;
+        if (count != 1) 
+            document.getElementById("result").value = parseInt(count) - 1;
+        else
+            return false;
+        
+    }
+</script>
+
+</html>

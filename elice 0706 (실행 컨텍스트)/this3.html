@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+</body>
+<script>
+
+    // let ab1 = function () {
+    //     console.log(this);
+    // }
+    // // ab1();
+
+    // console.log(ab1.bind());
+
+
+    // let ab2 = () => {
+    //     console.log(this);
+    // }
+    // ab2();
+
+    // function abc() {
+    //     console.log(this);
+    // }
+
+    // abc();
+
+    let o = {
+        o1: function () {
+            console.log(this);
+        },
+        o2: () => {
+            console.log(this);
+            let o3 = () => {
+                console.log(this);
+            }
+            o3();
+        },
+        o3: function () {
+            console.log(this);
+            let o4 = () => {
+                console.log(this);
+            }
+            o4();
+        },
+        o4: function () {
+            console.log(this);
+            let o5 = function () {
+                console.log(this);
+            }
+            o5();
+        }
+    }
+
+    // o.o1();
+    // o.o2();
+    // o.o3();
+    o.o4();
+
+</script>
+
+</html>
