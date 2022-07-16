@@ -33,10 +33,10 @@ const getList = () => {
 }
 
 
-const deleteContent = (data) => {
+const deleteContent = (shortId) => {
     $.ajax({
         methods: "GET",
-        url: "http://localhost:8080/posts/delete/" + data,
+        url: "http://localhost:8080/posts/delete/" + shortId,
         success: (res) => {
             if (res.result === 'delete-success') {
                 getList();
@@ -49,6 +49,10 @@ const deleteContent = (data) => {
     });
 }
 
-const changeContent = (data) => {
-    console.log(data);
+const changeContent = (shortId) => {
+    let changeData = listData.filter((it) => it.shortId === shortId); //해당하는 아이디 찾고
+
+    //그 값을 로컬 스토리지에 저장합니다. //또한 로컬스토리지는 String 형태로 저장되기 때문에 JSON의 String형태로 저장합니다.
+    window.localStorage.setItem("changeData", JSON.stringify(changeData[0]));
+    location.href = "./../posts/createOrEdit.html";
 }
