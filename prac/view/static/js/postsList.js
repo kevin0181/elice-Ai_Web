@@ -18,7 +18,7 @@ const getList = () => {
                 //map을 통해 listData에 html태그를 넣어준다.
                 let list = `<tr>
                 <th scope="row">${index + 1}</th>
-                <td>${it.title}</td>
+                <td onclick="detailPost('${it.shortId}')">${it.title}</td>
                 <td>${it.author}</td>
                 <td>
                 <button type="button" class="btn btn-outline-danger" onclick="deleteContent('${it.shortId}')">삭제</button>
@@ -30,6 +30,12 @@ const getList = () => {
             });
         }
     });
+}
+
+const detailPost = (shortId) => {
+    let detailData = listData.filter((it) => it.shortId === shortId); //해당하는 아이디 찾고
+    window.localStorage.setItem("detailData", JSON.stringify(detailData[0]));
+    location.href = "./../posts/detailPost.html";
 }
 
 
