@@ -59,7 +59,7 @@ const getList = () => {
             if (firstPage !== 0) {
                 firstPart = `<li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
+                            <span aria-hidden="true" onclick="changePage('${firstPage}')">&laquo;</span>
                         </a>
                     </li>
                     <li class="page-item"><a class="page-link" href="#" onclick="changePage('${firstPage}')">${firstPage}</a></li>`;
@@ -71,7 +71,7 @@ const getList = () => {
                 lastPart = `<li class="page-item"><a class="page-link" href="#" onclick="changePage('${lastPage}')">${lastPage}</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
+                            <span aria-hidden="true" onclick="changePage('${firstPage}')">&raquo;</span>
                         </a>
                     </li>`;
             } else {
@@ -85,7 +85,7 @@ const getList = () => {
 
                 let paginationData =
                     `${firstPart}
-                    <li class="page-item"><a class="page-link" href="#">${page}</a></li>
+                    <li class="page-item"><a class="page-link active" href="#">${page}</a></li>
                     ${lastPart}
                     `;
 
