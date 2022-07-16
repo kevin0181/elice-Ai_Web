@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 const {Post} = require('./../models/');
+const asyncHandler = require('../utils/async-handler');
 
 // router.get('/', (req, res, next) => { //client side render 형식은 페이지를 render 하는 부분이 필요가 없다.
 //     if (req.query.write) {
@@ -29,15 +30,15 @@ router.get("/", async (req, res, next) => { //전체 게시글 목록을 전달�
     res.json(posts);
 });
 
-router.get('/:shortId', async (req, res, next) => { //게시글을 id로 지정해서 가져오는 부분
+router.get('/:shortId', asyncHandler(async (req, res, next) => { //게시글을 id로 지정해서 가져오는 부분
     const {shortId} = req.params;
     const post = await Post.findOne({shortId}); // mongoDB에서 생성하는 id 말고 우리가 직접 생성한 shortId로 접근해야합니다.
     if (!post) {
-        next(new Error('Post NotFound'));
+        throw new Error('Post NotFound'); //asyncHandler에서 오류처리를 해주므로써 throw로 error를 던지기만 해도 된다.
         return;
     }
     res.json(post);
-});
+}));
 
 router.post('/:shortId', async (req, res, next) => { //id에 맞는 게시글 수정
     const {shortId} = req.params;
