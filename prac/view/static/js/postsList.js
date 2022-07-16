@@ -5,7 +5,7 @@ $(document).ready(() => {
     if (localStorage.getItem("page") === null) { //현재 기록된 페이지값 가져오기.
         localStorage.setItem("page", "1");
     }
-    localStorage.setItem("page", "3");
+    localStorage.setItem("page", "1");
     localStorage.removeItem("changeData");
     getList();
 });
@@ -58,8 +58,8 @@ const getList = () => {
 
             if (firstPage !== 0) {
                 firstPart = `<li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true" onclick="changePage('${firstPage}')">&laquo;</span>
+                        <a class="page-link" href="#" aria-label="Previous" onclick="changePage('${firstPage}')">
+                            <span aria-hidden="true" >&laquo;</span>
                         </a>
                     </li>
                     <li class="page-item"><a class="page-link" href="#" onclick="changePage('${firstPage}')">${firstPage}</a></li>`;
@@ -70,8 +70,8 @@ const getList = () => {
             if (lastPage !== null) {
                 lastPart = `<li class="page-item"><a class="page-link" href="#" onclick="changePage('${lastPage}')">${lastPage}</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true" onclick="changePage('${firstPage}')">&raquo;</span>
+                        <a class="page-link" href="#" aria-label="Next" onclick="changePage('${lastPage}')">
+                            <span aria-hidden="true" >&raquo;</span>
                         </a>
                     </li>`;
             } else {
