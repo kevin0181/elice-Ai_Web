@@ -14,6 +14,7 @@ mongoose.connection.on('connected', () => {
     console.log("Database Connection Success");
 });
 
+app.use(express.json()); // 이걸 해줘야지 json형태로 바디로 받아오기 때문에 필수!
 
 app.use("/posts", postsRouter);
 

@@ -23,14 +23,15 @@ router.post('/', async (req, res, next) => { // 게시글 작성
     }
 });
 
-router.get("/list", async (req, res, next) => { //전체 게시글 목록을 전달해줌
+router.get("/", async (req, res, next) => { //전체 게시글 목록을 전달해줌
     const posts = await Post.find({});
     res.json(posts);
 });
 
 router.get('/:shortId', async (req, res, next) => { //게시글을 id로 지정해서 가져오는 부분
     const {shortId} = req.params;
-    const post = await Post.findOne({shortId});
+    console.log(shortId);
+    const post = await Post.findOne({shortId}); // mongoDB에서 생성하는 id 말고 우리가 직접 생성한 shortId로 접근해야합니다.
     if (!post) {
         next(new Error('Post NotFound'));
         return;
@@ -57,7 +58,7 @@ router.post('/:shortId', async (req, res, next) => { //id에 맞는 게시글 �
 router.delete('/:shortId', async (req, res, next) => { //id에 맞는 게시글 삭제
     const {shortId} = req.params;
     try {
-        await Post.delete({shortId});
+        await Post.findOneAndDelete({shortId});
         res.json({
             result: "delete-success"
         })
