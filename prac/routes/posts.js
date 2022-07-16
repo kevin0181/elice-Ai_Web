@@ -10,10 +10,10 @@ const {Post} = require('./../models/');
 // });
 
 router.post('/', async (req, res, next) => { // 게시글 작성
-    const {title, content} = req.body;
+    const {title, content, author} = req.body;
     try {
         await Post.create({     //게시글을 DB에 저장
-            title, content,
+            title, content, author
         });
         res.json({      //저장 성공 시, result를 응답함.
             result: 'save-success'

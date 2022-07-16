@@ -10,7 +10,7 @@ $(document).ready(() => {
                 let listData = `<tr>
                 <th scope="row">${index+1}</th>
                 <td>${it.title}</td>
-                <td>elice</td>
+                <td>${it.author}</td>
                 <td>
                 <button type="button" class="btn btn-outline-danger">삭제</button>
                 <button type="button" class="btn btn-outline-info">수정</button>
