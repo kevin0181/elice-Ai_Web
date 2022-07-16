@@ -51,7 +51,6 @@ router.get("/", async (req, res, next) => { //전체 게시글 목록을 전달�
     const totalPage =
         Math.ceil(total / perPage);
 
-    console.log(posts);
     res.json({posts, totalPage});
 });
 

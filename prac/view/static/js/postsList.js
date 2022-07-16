@@ -1,10 +1,11 @@
 let listData;
 
+
 $(document).ready(() => {
     if (localStorage.getItem("page") === null) { //현재 기록된 페이지값 가져오기.
         localStorage.setItem("page", "1");
     }
-    localStorage.setItem("page", "1");
+    localStorage.setItem("page", "5");
     localStorage.removeItem("changeData");
     getList();
 });
@@ -13,13 +14,14 @@ const getList = () => {
     let page = localStorage.getItem("page"); //페이지 가져오기
     listData = {};
     $(".postsList").empty();
+    let totalPage;
     $.ajax({
         methods: "GET",
         url: `http://localhost:8080/posts?page=${page}&perPage=5`,
         success: (res) => {
             //console.log(res); //값 가져옴
             listData = res.posts;
-            console.log(res.totalPage);
+            totalPage = res.totalPage;
             listData.map((it, index) => {
                 let list = `<tr>
                 <th scope="row">${index + 1}</th>
@@ -33,6 +35,52 @@ const getList = () => {
                 //생성된 html을 .postsList 클래스에 append 해준다.
                 $(".postsList").append(list);
             });
+        },
+        complete: () => {
+
+            let firstPage = 0;
+            if ((Number(page) - 1) < 1) { //첫번째 페이지인지 체크
+                firstPage = 0;
+            } else {
+                firstPage = (Number(page) - 1);
+            }
+
+            let lastPage;
+
+            if (totalPage <= page) { //마지막 페이지인지 체크
+                lastPage = null;
+            } else {
+                lastPage = Number(page) + 1;
+            }
+
+            let firstPart;
+            let lastPart;
+
+            if (listData.length !== 0) {
+
+                $(".m-pagination").empty();
+
+                let paginationData =
+                    `<li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">${page}</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>`;
+
+                $(".m-pagination").append(paginationData);
+
+
+            } else {
+                return;
+            }
         }
     });
 }
