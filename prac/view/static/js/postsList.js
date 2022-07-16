@@ -5,10 +5,12 @@ $(document).ready(() => {
         url: "http://localhost:8080/posts",
         success: (res) => {
             console.log(res); //값 가져옴
+            let listData;
             res.map((it, index) => {
 
-                let listData = `<tr>
-                <th scope="row">${index+1}</th>
+                //map을 통해 listData에 html태그를 넣어준다.
+                listData += `<tr>
+                <th scope="row">${index + 1}</th>
                 <td>${it.title}</td>
                 <td>${it.author}</td>
                 <td>
@@ -17,11 +19,9 @@ $(document).ready(() => {
                 </td>
                 </tr>`
 
-                console.log(listData);
-
-
-                $(".postsList").append(listData);
-            })
+            });
+            //생성된 html을 .postsList 클래스에 append 해준다.
+            $(".postsList").append(listData);
         }
     })
 

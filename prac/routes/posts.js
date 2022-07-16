@@ -41,9 +41,9 @@ router.get('/:shortId', async (req, res, next) => { //게시글을 id로 지정�
 
 router.post('/:shortId', async (req, res, next) => { //id에 맞는 게시글 수정
     const {shortId} = req.params;
-    const {title, content} = req.body;
+    const {title, content, author} = req.body;
     const post = await Post.findOneAndUpdate({shortId}, {
-        title, content,
+        title, content
     });
     if (!post) {
         next(new Error('Post NotFound'));
