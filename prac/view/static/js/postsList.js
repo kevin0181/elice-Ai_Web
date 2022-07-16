@@ -62,13 +62,13 @@ const getList = () => {
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">${firstPage}</a></li>`;
+                    <li class="page-item"><a class="page-link" href="#" onclick="changePage('${firstPage}')">${firstPage}</a></li>`;
             } else {
                 firstPart = ``;
             }
 
             if (lastPage !== null) {
-                lastPart = `<li class="page-item"><a class="page-link" href="#">${lastPage}</a></li>
+                lastPart = `<li class="page-item"><a class="page-link" href="#" onclick="changePage('${lastPage}')">${lastPage}</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
@@ -97,6 +97,11 @@ const getList = () => {
             }
         }
     });
+}
+
+const changePage = (page) => {
+    localStorage.setItem("page", page);
+    getList();
 }
 
 const detailPost = (shortId) => {
