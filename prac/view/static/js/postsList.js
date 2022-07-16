@@ -2,6 +2,7 @@ let listData;
 
 
 $(document).ready(() => {
+    localStorage.removeItem("changeData");
     getList();
 });
 

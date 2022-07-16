@@ -26,7 +26,19 @@ router.post('/', async (req, res, next) => { // 게시글 작성
 });
 
 router.get("/", async (req, res, next) => { //전체 게시글 목록을 전달해줌
-    const posts = await Post.find({});
+    const page =
+        Number(req.query.page || 1);
+    const perPage =
+        Number(req.query.perPage || 10);
+
+    const total = await Post.countDocuments({});
+    const posts = await Post.find({})
+        .sort({createdAt: -1})      //마지막으로 작성 된 게시글을 첫번째 인덱스로
+        .skip(perPage * (page - 1))
+        .limit(perPage);
+    const totalPage =
+        Math.ceil(total / perPage);
+    console.log(totalPage);
     res.json(posts);
 });
 
