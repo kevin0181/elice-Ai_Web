@@ -5,7 +5,7 @@ $(document).ready(() => {
     if (localStorage.getItem("page") === null) { //현재 기록된 페이지값 가져오기.
         localStorage.setItem("page", "1");
     }
-    localStorage.setItem("page", "5");
+    localStorage.setItem("page", "3");
     localStorage.removeItem("changeData");
     getList();
 });
@@ -56,24 +56,38 @@ const getList = () => {
             let firstPart;
             let lastPart;
 
-            if (listData.length !== 0) {
-
-                $(".m-pagination").empty();
-
-                let paginationData =
-                    `<li class="page-item">
+            if (firstPage !== 0) {
+                firstPart = `<li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">${page}</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">${firstPage}</a></li>`;
+            } else {
+                firstPart = ``;
+            }
+
+            if (lastPage !== null) {
+                lastPart = `<li class="page-item"><a class="page-link" href="#">${lastPage}</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>`;
+            } else {
+                lastPart = '';
+            }
+
+
+            if (listData.length !== 0) {
+
+                $(".m-pagination").empty();
+
+                let paginationData =
+                    `${firstPart}
+                    <li class="page-item"><a class="page-link" href="#">${page}</a></li>
+                    ${lastPart}
+                    `;
 
                 $(".m-pagination").append(paginationData);
 
