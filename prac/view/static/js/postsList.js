@@ -1,12 +1,20 @@
 let listData;
 
+let URL;
+
 
 $(document).ready(() => {
+    if (localStorage.getItem("page") === null) { //현재 기록된 페이지값 가져오기.
+        localStorage.setItem("page", "1");
+    }
+
     localStorage.removeItem("changeData");
     getList();
+    pagination();
 });
 
 const getList = () => {
+    let page = localStorage.getItem("page"); //페이지 가져오기
     listData = {};
     $(".postsList").empty();
     $.ajax({
