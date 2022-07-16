@@ -15,7 +15,7 @@ mongoose.connection.on('connected', () => {
     console.log("Database Connection Success");
 });
 
-app.use(cors());
+app.use(cors()); //cors 오류를 일시적으로 해결, 'npm install http cors' 입력
 
 app.use(express.json()); // 이걸 해줘야지 json형태로 바디로 받아오기 때문에 필수!
 
