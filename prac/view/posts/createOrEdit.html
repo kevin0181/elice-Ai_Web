@@ -35,27 +35,17 @@
         </div>
     </header>
     <section>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">title</th>
-                <th scope="col">name</th>
-                <th scope="col">delete & edit</th>
-            </tr>
-            </thead>
-            <tbody class="postsList">
-<!--            <tr>-->
-<!--                <th scope="row">1</th>-->
-<!--                <td>Mark</td>-->
-<!--                <td>Otto</td>-->
-<!--                <td>-->
-<!--                    <button type="button" class="btn btn-outline-danger">삭제</button>-->
-<!--                    <button type="button" class="btn btn-outline-info">수정</button>-->
-<!--                </td>-->
-<!--            </tr>-->
-            </tbody>
-        </table>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력해주세요.">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                      placeholder="내용을 입력해주세요."></textarea>
+        </div>
+        <button type="button" class="btn btn-outline-warning">완료</button>
+        <button type="button" class="btn btn-outline-danger" onclick="history.back()">취소하기</button>
     </section>
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
