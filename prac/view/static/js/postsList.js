@@ -1,16 +1,12 @@
 let listData;
 
-let URL;
-
-
 $(document).ready(() => {
     if (localStorage.getItem("page") === null) { //현재 기록된 페이지값 가져오기.
         localStorage.setItem("page", "1");
     }
-
+    localStorage.setItem("page", "1");
     localStorage.removeItem("changeData");
     getList();
-    pagination();
 });
 
 const getList = () => {
@@ -19,12 +15,12 @@ const getList = () => {
     $(".postsList").empty();
     $.ajax({
         methods: "GET",
-        url: "http://localhost:8080/posts",
+        url: `http://localhost:8080/posts?page=${page}&perPage=5`,
         success: (res) => {
             //console.log(res); //값 가져옴
-            listData = res;
+            listData = res.posts;
+            console.log(res.totalPage);
             listData.map((it, index) => {
-                //map을 통해 listData에 html태그를 넣어준다.
                 let list = `<tr>
                 <th scope="row">${index + 1}</th>
                 <td onclick="detailPost('${it.shortId}')"  class="postTitle-btn">${it.title}</td>

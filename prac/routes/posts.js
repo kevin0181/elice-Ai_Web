@@ -50,7 +50,9 @@ router.get("/", async (req, res, next) => { //전체 게시글 목록을 전달�
         .limit(perPage);
     const totalPage =
         Math.ceil(total / perPage);
-    res.json(posts);
+
+    console.log(posts);
+    res.json({posts, totalPage});
 });
 
 router.get('/:shortId', asyncHandler(async (req, res, next) => { //게시글을 id로 지정해서 가져오는 부분
