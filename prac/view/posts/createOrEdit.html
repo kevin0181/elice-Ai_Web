@@ -35,17 +35,23 @@
         </div>
     </header>
     <section>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력해주세요.">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                      placeholder="내용을 입력해주세요."></textarea>
-        </div>
-        <button type="button" class="btn btn-outline-warning">완료</button>
-        <button type="button" class="btn btn-outline-danger" onclick="history.back()">취소하기</button>
+        <form method="post" action="http://localhost:8080/posts/" id="contentForm">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="email" class="form-control" name="title" id="title" placeholder="제목을 입력해주세요.">
+            </div>
+            <div class="mb-3">
+                <label for="author" class="form-label">author</label>
+                <input type="email" class="form-control" name="author" id="author" value="elice" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" id="content" rows="3" name="content"
+                          placeholder="내용을 입력해주세요."></textarea>
+            </div>
+            <button type="button" class="btn btn-outline-warning" onclick="insertContent()">완료</button>
+            <button type="button" class="btn btn-outline-danger" onclick="history.back()">취소하기</button>
+        </form>
     </section>
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -60,5 +66,5 @@
 </div>
 </body>
 <!--mine file-->
-<script src="./../static/js/postsList.js"></script>
+<script src="./../static/js/postsInerts.js"></script>
 </html>
