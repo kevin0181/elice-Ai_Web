@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dayjs": "^1.11.3",
     "express": "^4.18.1",
+    "http": "^0.0.1-security",
     "mongoose": "^6.4.4",
     "nanoid": "^3.3.4"
   }

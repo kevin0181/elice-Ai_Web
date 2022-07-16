@@ -2,6 +2,7 @@ const express = require("express")
 const app = express();
 const dayjs = require('dayjs');
 const postsRouter = require("./routes/posts")
+const cors = require('cors');
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/myapp');
@@ -13,6 +14,8 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on('connected', () => {
     console.log("Database Connection Success");
 });
+
+app.use(cors());
 
 app.use(express.json()); // 이걸 해줘야지 json형태로 바디로 받아오기 때문에 필수!
 
