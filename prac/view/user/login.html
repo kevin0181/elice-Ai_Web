@@ -6,6 +6,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>엘리스 게시글</title>
+
+    <link rel="stylesheet" href="./../static/css/list.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -17,24 +20,6 @@
 <body>
 <div class="container">
     <section>
-        <form method="post" action="http://localhost:8080/posts/" id="contentForm">
-            <input type="hidden" id="shortId">
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="email" class="form-control" name="title" id="title" placeholder="제목을 입력해주세요.">
-            </div>
-            <div class="mb-3">
-                <label for="author" class="form-label">author</label>
-                <input type="email" class="form-control" name="author" id="author" value="elice" readonly>
-            </div>
-            <div class="mb-3">
-                <label for="content" class="form-label">Content</label>
-                <textarea class="form-control" id="content" rows="3" name="content"
-                          placeholder="내용을 입력해주세요."></textarea>
-            </div>
-            <button type="button" class="btn btn-outline-warning" onclick="insertContent()">완료</button>
-            <button type="button" class="btn btn-outline-danger" onclick="history.back()">취소하기</button>
-        </form>
     </section>
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -49,6 +34,5 @@
 </div>
 </body>
 <!--mine file-->
-<script src="./../static/js/postsInerts.js"></script>
-<script src="./../static/js/header.js"></script>
+<script src="./../../view/static/js/header.js"/>
 </html>
