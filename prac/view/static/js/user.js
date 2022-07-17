@@ -24,8 +24,16 @@ const signIn = () => {
         data: formData,
         success: (res) => {
             if (res.result === 'signIn-success') {
-                console.log(res);
+                alert("회원가입에 성공하였습니다. 재 로그인 해주세요.");
+                location.href = "./../user/login.html";
             }
+        },
+        error: function (error) {
+            alert(error.responseText);
+            $("#email").val("")
+            $("#email").focus();
+            $("#password").val("");
+            $("#name").val("");
         }
     });
 }
