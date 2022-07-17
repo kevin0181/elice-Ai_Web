@@ -1,7 +1,8 @@
 const express = require("express")
 const app = express();
 const dayjs = require('dayjs');
-const postsRouter = require("./routes/posts")
+const postsRouter = require("./routes/posts");
+const userRouter = require("./routes/user");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -23,6 +24,8 @@ app.use(express.json()); // 이걸 해줘야지 json형태로 바디로 받아�
 app.use(bodyParser.urlencoded({extended: false})); //이걸 통해 html의 form을 통해 들어오는 데이터를 처리한다.
 
 app.use("/posts", postsRouter);
+
+app.use("/user", userRouter);
 
 app.locals.formatDate = (date) => {
     return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
