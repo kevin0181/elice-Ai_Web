@@ -13,7 +13,7 @@ let header = `<header class="d-flex flex-wrap align-items-center justify-content
         </ul>
         <div class="col-md-3 text-end">
             <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='./../user/login.html'">Login</button>
-            <button type="button" class="btn btn-primary">Sign-up</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='./../user/signUp.html'">Sign-up</button>
         </div>
     </header>`
 
