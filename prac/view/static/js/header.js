@@ -12,11 +12,11 @@ let header = `<header class="d-flex flex-wrap align-items-center justify-content
             <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
         </ul>
         <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Login</button>
+            <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='./../user/login.html'">Login</button>
             <button type="button" class="btn btn-primary">Sign-up</button>
         </div>
     </header>`
 
 $(document).ready(() => {
-    $("body").prepend(header);
+    $(".container").prepend(header);
 });
