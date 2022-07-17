@@ -36,7 +36,7 @@ const insertContent = () => {
                     location.href = "./../posts/list.html";
                 }
             }
-        })
+        });
 
         return;
     }

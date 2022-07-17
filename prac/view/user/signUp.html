@@ -19,20 +19,20 @@
 <body>
 <div class="container">
     <section>
-        <form>
+        <form id="signIn-form">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password">
             </div>
             <div class="mb-3">
-                <label for="userName" class="form-label">Name</label>
-                <input type="password" class="form-control" id="userName">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="name">
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary" onclick="signIn()">Sign in</button>
         </form>
     </section>
     <footer class="py-3 my-4">
@@ -48,5 +48,6 @@
 </div>
 </body>
 <!--mine file-->
+<script src="./../../view/static/js/user.js"></script>
 <script src="./../../view/static/js/header.js"></script>
 </html>
