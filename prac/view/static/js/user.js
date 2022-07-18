@@ -77,6 +77,7 @@ const signIn = () => {
         data: formData,
         success: (res) => {
             setCookie("accessToken", res.accessToken, "1"); //쿠키에 jwt 토큰을 저장
+            location.href = "./../posts/list.html";
         },
         error: function (error) {
             alert(error.responseText);
