@@ -53,7 +53,8 @@ router.get("/", authMiddleware, async (req, res, next) => { //전체 게시글 �
     const posts = await Post.find({})
         .sort({createdAt: -1})      //마지막으로 작성 된 게시글을 첫번째 인덱스로
         .skip(perPage * (page - 1))
-        .limit(perPage);
+        .limit(perPage)
+        .populate('author');
     const totalPage =
         Math.ceil(total / perPage);
 

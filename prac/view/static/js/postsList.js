@@ -23,14 +23,14 @@ const getList = () => {
             xhr.setRequestHeader("accessToken", getCookie("accessToken"));
         },
         success: (res) => {
-            //console.log(res); //값 가져옴
+            // console.log(res); //값 가져옴
             listData = res.posts;
             totalPage = res.totalPage;
             listData.map((it, index) => {
                 let list = `<tr>
                 <th scope="row">${index + 1}</th>
                 <td onclick="detailPost('${it.shortId}')"  class="postTitle-btn">${it.title}</td>
-                <td>${it.author}</td>
+                <td>${it.author.name}</td>
                 <td>
                 <button type="button" class="btn btn-outline-danger" onclick="deleteContent('${it.shortId}')">삭제</button>
                 <button type="button" class="btn btn-outline-info" onclick="changeContent('${it.shortId}')">수정</button>
