@@ -32,7 +32,7 @@ let yesLoginHeader = `<header class="d-flex flex-wrap align-items-center justify
         </ul>
         <div class="col-md-3 text-end">
             <button type="button" class="btn btn-outline-primary me-2">내 정보</button>
-            <button type="button" class="btn btn-outline-danger me-2">로그아웃</button>
+            <button type="button" class="btn btn-outline-danger me-2" onclick="logout()">로그아웃</button>
         </div>
     </header>`
 
@@ -43,3 +43,8 @@ $(document).ready(() => {
         $(".container").prepend(noLoginHeader);
     }
 });
+
+const logout = () => {
+    delCookie("accessToken");
+    location.href = "./../posts/list.html";
+}

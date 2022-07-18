@@ -41,6 +41,9 @@ router.post("/signIn", asyncHandler(async (req, res, next) => {
 
 }));
 
+// router.post("/logout", asyncHandler((req, res, next) => {
+// }))
+
 router.post("/signUp", asyncHandler(async (req, res, next) => {
 
     const {email, password, name} = req.body;
