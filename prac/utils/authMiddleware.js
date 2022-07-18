@@ -11,10 +11,8 @@ module.exports = async (req, res, next) => {
                 jwt.verify(accessToken, jwtConfig.secret, //jwt.verify => 인증 처리할대 사용.
                     (err, decoded) => {
                         if (err) {
-                            console.log(err);
                             reject(err);
                         } else {
-                            console.log(decoded);
                             resolve(decoded);
                         }
                     });
