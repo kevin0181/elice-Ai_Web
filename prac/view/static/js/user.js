@@ -76,6 +76,7 @@ const signIn = () => {
         url: 'http://localhost:8080/user/signIn',
         data: formData,
         success: (res) => {
+            sessionStorage.setItem("shortId", res.shortId);
             setCookie("accessToken", res.accessToken, "1"); //쿠키에 jwt 토큰을 저장
             location.href = "./../posts/list.html";
         },

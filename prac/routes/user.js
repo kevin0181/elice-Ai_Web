@@ -5,6 +5,7 @@ const asyncHandler = require('../utils/async-handler');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken'); //npm i jsonwebtoken -> jwt 설치
 const secret = require('./../config/jwt-config');
+const shortId = require("../models/schemas/types/short-id");
 
 
 router.post("/signIn", asyncHandler(async (req, res, next) => {
@@ -34,7 +35,7 @@ router.post("/signIn", asyncHandler(async (req, res, next) => {
             if (err) {
                 res.status(401).json({success: false, errormessage: 'token sign fail'});
             } else {
-                res.json({success: true, accessToken: token});
+                res.json({success: true, accessToken: token, shortId: userData.shortId});
             }
         }
     )
