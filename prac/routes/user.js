@@ -3,9 +3,14 @@ const router = Router();
 const {User} = require('./../models/');
 const asyncHandler = require('../utils/async-handler');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken'); //npm i jsonwebtoken -> jwt 설치
 
 
 router.post("/signIn", (req, res, next) => {
+
+    const {email, password} = req.body;
+
+
 
 });
 

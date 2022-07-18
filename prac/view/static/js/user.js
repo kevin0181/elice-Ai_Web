@@ -56,6 +56,7 @@ const signUp = () => {
 
 
 const signIn = () => {
+
     if (!$("#email").val()) {
         alert("이메일을 입력해주세요.");
         $("#email").focus();
