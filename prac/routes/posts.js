@@ -11,8 +11,6 @@ const authMiddleware = require("../utils/authMiddleware")
 //     }
 // });
 
-router.use(authMiddleware);
-
 router.post('/', async (req, res, next) => { // 게시글 작성
     const {title, content, author} = req.body;
     try {
@@ -27,7 +25,7 @@ router.post('/', async (req, res, next) => { // 게시글 작성
     }
 });
 
-router.get("/", async (req, res, next) => { //전체 게시글 목록을 전달해줌
+router.get("/", authMiddleware, async (req, res, next) => { //전체 게시글 목록을 전달해줌
     console.log(req.query);
     if (req.query.page < 1) {
         next("Please enter a number greater than 1"); //page가 0보다 작으면 오류
