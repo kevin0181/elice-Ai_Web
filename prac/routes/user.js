@@ -5,11 +5,11 @@ const asyncHandler = require('../utils/async-handler');
 const crypto = require('crypto');
 
 
-router.post("/login", (req, res, next) => {
+router.post("/signIn", (req, res, next) => {
 
 });
 
-router.post("/sign", asyncHandler(async (req, res, next) => {
+router.post("/signUp", asyncHandler(async (req, res, next) => {
 
     const {email, password, name} = req.body;
 

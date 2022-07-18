@@ -19,16 +19,16 @@
 <body>
 <div class="container">
     <section>
-        <form>
+        <form id="signIn-form">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" onclick="signIn()" class="btn btn-primary">Login</button>
         </form>
     </section>
     <footer class="py-3 my-4">

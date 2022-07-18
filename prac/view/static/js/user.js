@@ -31,11 +31,11 @@ const signUp = () => {
         return;
     }
 
-    let formData = $('#signIn-form').serialize();
+    let formData = $('#signUp-form').serialize();
 
     $.ajax({
         type: "POST",
-        url: 'http://localhost:8080/user/sign',
+        url: 'http://localhost:8080/user/signUp',
         data: formData,
         success: (res) => {
             if (res.result === 'signIn-success') {
@@ -48,7 +48,39 @@ const signUp = () => {
             $("#email").val("")
             $("#email").focus();
             $("#password").val("");
+            $("#RePassword").val("");
             $("#name").val("");
+        }
+    });
+}
+
+
+const signIn = () => {
+    if (!$("#email").val()) {
+        alert("이메일을 입력해주세요.");
+        $("#email").focus();
+        return;
+    }
+
+    if (!$("#password").val()) {
+        alert("패스워드를 입력해주세요.");
+        $("#password").focus();
+        return;
+    }
+
+    let formData = $('#signIn-form').serialize();
+
+    $.ajax({
+        type: "POST",
+        url: 'http://localhost:8080/user/signIn',
+        data: formData,
+        success: (res) => {
+        },
+        error: function (error) {
+            alert(error.responseText);
+            $("#email").val("")
+            $("#email").focus();
+            $("#password").val("");
         }
     });
 }
