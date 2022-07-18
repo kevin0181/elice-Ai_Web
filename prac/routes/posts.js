@@ -1,8 +1,9 @@
 const {Router} = require('express');
 const router = Router();
-const {Post} = require('./../models/');
+const {Post, User} = require('./../models/');
 const asyncHandler = require('../utils/async-handler');
-const authMiddleware = require("../utils/authMiddleware")
+const authMiddleware = require("../utils/authMiddleware");
+const mongoose = require("mongoose")
 
 // router.get('/', (req, res, next) => { //client side render 형식은 페이지를 render 하는 부분이 필요가 없다.
 //     if (req.query.write) {
@@ -11,9 +12,15 @@ const authMiddleware = require("../utils/authMiddleware")
 //     }
 // });
 
-router.post('/', async (req, res, next) => { // 게시글 작성
-    const {title, content, author} = req.body;
+router.post('/', asyncHandler(async (req, res, next) => { // 게시글 작성
+    const {title, content, shortId} = req.body;
+
     try {
+        const author = await User.findOne({shortId: shortId}); //문제에서는 find라고 되어잇는데 findOne을 사용해야합니다. //배열로받아옴.
+
+        if (!author) {
+            throw new Error("No User");
+        }
         await Post.create({     //게시글을 DB에 저장
             title, content, author
         });
@@ -21,9 +28,9 @@ router.post('/', async (req, res, next) => { // 게시글 작성
             result: 'save-success'
         });
     } catch (err) {
-        next(err);
+        throw new Error(err);
     }
-});
+}));
 
 router.get("/", authMiddleware, async (req, res, next) => { //전체 게시글 목록을 전달해줌
     if (req.query.page < 1) {

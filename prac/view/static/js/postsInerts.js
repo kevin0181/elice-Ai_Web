@@ -24,7 +24,7 @@ const insertContent = () => {
     }
 
     let formData = $('#contentForm').serialize(); //serialize는 form 태그내의 항목들을 자동으로 읽어와 queryString형으로 변경해준다.
-
+    formData += '&shortId=' + sessionStorage.getItem("shortId"); //shortid값을 추가해서 가져옵니다.
     if ($("#shortId").val()) { //만약 아이디 값이 있으면 수정으로 변경
 
         $.ajax({
