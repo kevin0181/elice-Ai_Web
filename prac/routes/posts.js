@@ -61,7 +61,7 @@ router.get("/", authMiddleware, async (req, res, next) => { //전체 게시글 �
     res.json({posts, totalPage});
 });
 
-router.get('/:shortId', asyncHandler(async (req, res, next) => { //게시글을 id로 지정해서 가져오는 부분
+router.get('/:shortId', asyncHandler(async (req, res, next) => { //게시글을 id로 지정해서 가져오는 부분 ->사용안함.
     const {shortId} = req.params;
     const post = await Post.findOne({shortId}); // mongoDB에서 생성하는 id 말고 우리가 직접 생성한 shortId로 접근해야합니다.
     if (!post) {
@@ -72,8 +72,20 @@ router.get('/:shortId', asyncHandler(async (req, res, next) => { //게시글을 
 }));
 
 router.post('/:shortId', async (req, res, next) => { //id에 맞는 게시글 수정
+
     const {shortId} = req.params;
-    const {title, content, author} = req.body;
+
+    const {title, content} = req.body;
+
+    const findPost = await Post.findOne({
+        shortId
+    }).populate('author');
+
+    if (findPost.author.shortId !== req.body.shortId) {
+        next(new Error("Not Authorized"));
+        return;
+    }
+
     const post = await Post.findOneAndUpdate({shortId}, {
         title, content
     });
