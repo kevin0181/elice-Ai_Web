@@ -90,6 +90,15 @@ router.post('/:shortId', async (req, res, next) => { //id에 맞는 게시글 �
 router.get('/delete/:shortId', async (req, res, next) => { //id에 맞는 게시글 삭제
     const {shortId} = req.params;
     try {
+        const post = await Post.findOne({
+            shortId
+        }).populate('author');
+
+        if (post.author.shortId !== req.query.shortId) {
+            next(new Error("Not Authorized"));
+            return;
+        }
+
         await Post.findOneAndDelete({shortId});
         res.json({
             result: "delete-success"

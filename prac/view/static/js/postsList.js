@@ -127,6 +127,10 @@ const deleteContent = (shortId) => {
     $.ajax({
         methods: "GET",
         url: "http://localhost:8080/posts/delete/" + shortId,
+        data: {
+            shortId: sessionStorage.getItem("shortId")
+        },
+        dataType: 'json',
         success: (res) => {
             if (res.result === 'delete-success') {
                 getList();
@@ -134,7 +138,7 @@ const deleteContent = (shortId) => {
             }
         },
         error: (e) => {
-            console.log(e);
+            alert("삭제할 수 없는 글입니다.");
         }
     });
 }
