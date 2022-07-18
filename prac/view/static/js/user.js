@@ -76,6 +76,7 @@ const signIn = () => {
         url: 'http://localhost:8080/user/signIn',
         data: formData,
         success: (res) => {
+            console.log(res);
         },
         error: function (error) {
             alert(error.responseText);

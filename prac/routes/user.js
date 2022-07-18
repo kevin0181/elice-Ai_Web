@@ -16,10 +16,30 @@ router.post("/signIn", asyncHandler(async (req, res, next) => {
         return;
     }
 
-    if (password !== userData.password) {
+    let hashPassword = await passwordHash(password);
+    if (hashPassword !== userData.hashPassword) {
         throw new Error("비밀번호가 일치하지 않습니다.");
         return;
     }
+
+    const secret = "005c9780fe7c11eb89b4e39719de58a5"; //UUID 암호 문자열 사용
+
+    jwt.sign({
+            email: email,
+            name: userData.name
+        },
+        secret,
+        {
+            expiresIn: '1d'  //유효 기간이다. "1y", 일 단위 : "1 days", "1d", 시간 단위 : "2.5 hrs", "2h", 분 단위 : "1m", 초 단위 : "5s"
+        }, (err, token) => {
+            if (err) {
+                console.log(err);
+                res.status(401).json({success: false, errormessage: 'token sign fail'});
+            } else {
+                res.json({success: true, accessToken: token});
+            }
+        }
+    )
 
 }));
 
