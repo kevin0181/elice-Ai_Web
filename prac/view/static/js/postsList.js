@@ -40,6 +40,13 @@ const getList = () => {
                 $(".postsList").append(list);
             });
         },
+        error: (res) => {
+            console.log(res);
+            if (res.responseJSON.success === false) {
+                alert("로그인 해주세요.");
+                location.href = "./../user/login.html";
+            }
+        },
         complete: () => {
 
             let firstPage = 0;
