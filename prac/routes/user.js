@@ -6,13 +6,22 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken'); //npm i jsonwebtoken -> jwt 설치
 
 
-router.post("/signIn", (req, res, next) => {
+router.post("/signIn", asyncHandler(async (req, res, next) => {
 
     const {email, password} = req.body;
 
+    const userData = await User.findOne({email});
+    if (!userData) {
+        throw new Error("회원을 찾을 수 없습니다.");
+        return;
+    }
 
+    if (password !== userData.password) {
+        throw new Error("비밀번호가 일치하지 않습니다.");
+        return;
+    }
 
-});
+}));
 
 router.post("/signUp", asyncHandler(async (req, res, next) => {
 
