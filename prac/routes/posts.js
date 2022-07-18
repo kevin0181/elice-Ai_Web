@@ -2,6 +2,7 @@ const {Router} = require('express');
 const router = Router();
 const {Post} = require('./../models/');
 const asyncHandler = require('../utils/async-handler');
+const authMiddleware = require("../utils/authMiddleware")
 
 // router.get('/', (req, res, next) => { //client side render 형식은 페이지를 render 하는 부분이 필요가 없다.
 //     if (req.query.write) {
@@ -10,8 +11,9 @@ const asyncHandler = require('../utils/async-handler');
 //     }
 // });
 
+router.use(authMiddleware);
+
 router.post('/', async (req, res, next) => { // 게시글 작성
-    console.log(req.body);
     const {title, content, author} = req.body;
     try {
         await Post.create({     //게시글을 DB에 저장

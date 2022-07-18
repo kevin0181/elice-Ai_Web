@@ -18,6 +18,10 @@ const getList = () => {
     $.ajax({
         methods: "GET",
         url: `http://localhost:8080/posts?page=${page}&perPage=5`,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("accessToken", getCookie("accessToken"));
+        },
         success: (res) => {
             //console.log(res); //값 가져옴
             listData = res.posts;
