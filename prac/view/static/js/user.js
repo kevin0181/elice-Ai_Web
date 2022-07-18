@@ -77,6 +77,7 @@ const signIn = () => {
         data: formData,
         success: (res) => {
             console.log(res);
+            console.log(res.accessToken);
         },
         error: function (error) {
             alert(error.responseText);

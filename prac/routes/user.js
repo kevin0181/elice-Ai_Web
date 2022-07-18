@@ -32,7 +32,6 @@ router.post("/signIn", asyncHandler(async (req, res, next) => {
             expiresIn: '1d'  //유효 기간이다. "1y", 일 단위 : "1 days", "1d", 시간 단위 : "2.5 hrs", "2h", 분 단위 : "1m", 초 단위 : "5s"
         }, (err, token) => {
             if (err) {
-                console.log(err);
                 res.status(401).json({success: false, errormessage: 'token sign fail'});
             } else {
                 res.json({success: true, accessToken: token});
