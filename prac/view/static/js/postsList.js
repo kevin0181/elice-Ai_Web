@@ -43,6 +43,7 @@ const getList = () => {
         error: (res) => {
             console.log(res);
             if (res.responseJSON.success === false) {
+                delCookie("accessToken")
                 alert("로그인 해주세요.");
                 location.href = "./../user/login.html";
             }
