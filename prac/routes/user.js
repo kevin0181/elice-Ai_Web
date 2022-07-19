@@ -43,9 +43,6 @@ router.post("/signIn", asyncHandler(async (req, res, next) => {
 
 }));
 
-// router.post("/logout", asyncHandler((req, res, next) => {
-// }))
-
 router.post("/signUp", asyncHandler(async (req, res, next) => {
 
     const {email, password, name} = req.body;
@@ -72,6 +69,7 @@ router.post("/signUp", asyncHandler(async (req, res, next) => {
 }));
 
 router.post("/:shortId/find", asyncHandler(async (req, res, next) => {
+
     let shortId = req.params.shortId;
     let [user] = await User.find({shortId});
     let myEmail = 'dudspsdl123321@gmail.com'
@@ -89,21 +87,26 @@ router.post("/:shortId/find", asyncHandler(async (req, res, next) => {
         },
     });
     const randomPassword = generateRandomPassword(); //랜덤한 수를 가져오고
-    const hashRandomPassword = passwordHash(randomPassword);
-    await User.findOneAndUpdate({shortId}, {
-        hashPassword: hashRandomPassword
-    })
+
+    passwordHash(randomPassword).then(async (hashRandomPassword) => {
+        await User.findOneAndUpdate({shortId}, {
+            hashPassword: hashRandomPassword
+        })
+    });
 
     let info = await transporter.sendMail({
-        from: `"WDMA Team" <${myEmail}>`,
+        from: `"Elice" <${myEmail}>`,
         to: user.email,
-        subject: 'WDMA Auth Number',
+        subject: 'Elice By Password Reset',
         html: `<b>초기화 비밀번호 : ${randomPassword}</b>`,
     });
 
     console.log('Message sent: %s', info.messageId);
 
-    res.send(info.messageId);
+    res.json({
+        result: '이메일로 전송하였습니다.'
+    });
+
 }))
 
 const passwordHash = async (pw) => {

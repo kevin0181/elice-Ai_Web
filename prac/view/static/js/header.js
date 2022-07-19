@@ -31,7 +31,6 @@ let yesLoginHeader = `<header class="d-flex flex-wrap align-items-center justify
             <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
         </ul>
         <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-primary me-2" onclick="findPassword()">비밀번호 찾기</button>
             <button type="button" class="btn btn-outline-danger me-2" onclick="logout()">로그아웃</button>
         </div>
     </header>`
@@ -47,16 +46,4 @@ $(document).ready(() => {
 const logout = () => {
     delCookie("accessToken");
     location.href = "./../posts/list.html";
-}
-
-const findPassword = () => {
-    let shortId = sessionStorage.getItem("shortId");
-    console.log(shortId);
-    $.ajax({
-        method: 'POST',
-        url: `http://localhost:8080/user/${shortId}/find`,
-        success: (res) => {
-            console.log(res);
-        }
-    })
 }
