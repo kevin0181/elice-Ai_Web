@@ -33,10 +33,35 @@ router.post('/', asyncHandler(async (req, res, next) => { // 게시글 작성
 }));
 
 router.get("/:shortId/posts", asyncHandler(async (req, res, next) => { //user에따른 리스트 전달
+
+    if (req.query.page < 1) {
+        next("Please enter a number greater than 1"); //page가 0보다 작으면 오류
+        return;
+    }
+
+    const page =
+        Number(req.query.page || 1);
+
+    if (page > req.query.perPage) {
+        next("Please enter a number greater than by page"); //perPage가 더크면 오류
+        return;
+    }
+
+    const perPage =
+        Number(req.query.perPage || 10);
     const {shortId} = req.params;
     const user = await User.find({shortId});
-    const posts = await Post.find({author: user}).populate('author');
-    res.json({posts, user});
+    const total = await Post.countDocuments({author: user});
+    const posts = await Post.find({author: user})
+        .sort({createdAt: -1})      //마지막으로 작성 된 게시글을 첫번째 인덱스로
+        .skip(perPage * (page - 1))
+        .limit(perPage)
+        .populate('author');
+
+    const totalPage =
+        Math.ceil(total / perPage);
+
+    res.json({posts, totalPage});
 }))
 
 router.get("/", authMiddleware, async (req, res, next) => { //전체 게시글 목록을 전달해줌

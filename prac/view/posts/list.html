@@ -21,6 +21,15 @@
 <div class="container">
     <section>
         <button type="button" class="btn btn-outline-dark" onclick="location.href='./createOrEdit.html'">글 작성하기</button>
+        <div style="width: 30%; display: inline-block; margin-left: 50%;">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="user shortId" id="shortId"
+                       aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button onclick="searchShortId()" class="btn btn-outline-secondary" type="button" name="shortId"
+                        id="shortIdButton">search
+                </button>
+            </div>
+        </div>
         <table class="table">
             <thead>
             <tr>
