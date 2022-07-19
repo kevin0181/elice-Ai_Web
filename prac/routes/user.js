@@ -73,7 +73,8 @@ router.post("/signUp", asyncHandler(async (req, res, next) => {
 
 router.post("/:shortId/find", asyncHandler(async (req, res, next) => {
     let shortId = req.params.shortId;
-    let user = await User.find({shortId});
+    let [user] = await User.find({shortId});
+    let myEmail = 'dudspsdl123321@gmail.com'
 
     let transporter = nodeMailer.createTransport({ // 이메일 보낼 사용자 정의하기.
         service: 'gmail',
@@ -81,13 +82,15 @@ router.post("/:shortId/find", asyncHandler(async (req, res, next) => {
         port: 587,
         secure: false,
         auth: {
-            user: 'dudspsdl123321@gmail.com',
-            pass: 'password',
+            user: myEmail,
+            pass: 'bbqruwbkxybsadoj',
         },
     });
 
+    console.log(user);
+
     let info = await transporter.sendMail({
-        from: `"WDMA Team" dudspsdl123321@gmail.com`,
+        from: `"WDMA Team" <${myEmail}>`,
         to: user.email,
         subject: 'WDMA Auth Number',
         // text: generatedAuthNumber,
@@ -96,7 +99,7 @@ router.post("/:shortId/find", asyncHandler(async (req, res, next) => {
 
     console.log('Message sent: %s', info.messageId);
 
-
+    res.send(info.messageId);
 }))
 
 const passwordHash = async (pw) => {

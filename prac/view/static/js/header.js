@@ -50,5 +50,13 @@ const logout = () => {
 }
 
 const findPassword = () => {
-
+    let shortId = sessionStorage.getItem("shortId");
+    console.log(shortId);
+    $.ajax({
+        method: 'POST',
+        url: `http://localhost:8080/user/${shortId}/find`,
+        success: (res) => {
+            console.log(res);
+        }
+    })
 }
