@@ -6,7 +6,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken'); //npm i jsonwebtoken -> jwt 설치
 const secret = require('./../config/jwt-config');
 const shortId = require("../models/schemas/types/short-id");
-const nodeMailer = require("nodemailer");
+const nodeMailer = require("nodemailer"); //이메일 전송을 사용하기 위해 라이브러리 설치
 
 
 router.post("/signIn", asyncHandler(async (req, res, next) => {
@@ -75,6 +75,8 @@ router.post("/:shortId/find", asyncHandler(async (req, res, next) => {
     let shortId = req.params.shortId;
     let [user] = await User.find({shortId});
     let myEmail = 'dudspsdl123321@gmail.com'
+
+    //이메일 인증을 사용하려면 구글에서 2단계 인증 및 앱비밀번호 생성해야함.
 
     let transporter = nodeMailer.createTransport({ // 이메일 보낼 사용자 정의하기.
         service: 'gmail',
