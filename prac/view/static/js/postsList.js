@@ -214,19 +214,19 @@ const searchShortId = () => { //shortId에따른 유저 검색
 
             if (firstPage !== 0) {
                 firstPart = `<li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous" onclick="changePage('${firstPage}')">
+                        <a class="page-link" href="#" aria-label="Previous" onclick="searchChangePage('${firstPage}')">
                             <span aria-hidden="true" >&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#" onclick="changePage('${firstPage}')">${firstPage}</a></li>`;
+                    <li class="page-item"><a class="page-link" href="#" onclick="searchChangePage('${firstPage}')">${firstPage}</a></li>`;
             } else {
                 firstPart = ``;
             }
 
             if (lastPage !== null) {
-                lastPart = `<li class="page-item"><a class="page-link" href="#" onclick="changePage('${lastPage}')">${lastPage}</a></li>
+                lastPart = `<li class="page-item"><a class="page-link" href="#" onclick="searchChangePage('${lastPage}')">${lastPage}</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next" onclick="changePage('${lastPage}')">
+                        <a class="page-link" href="#" aria-label="Next" onclick="searchChangePage('${lastPage}')">
                             <span aria-hidden="true" >&raquo;</span>
                         </a>
                     </li>`;
@@ -253,4 +253,9 @@ const searchShortId = () => { //shortId에따른 유저 검색
             }
         }
     });
+}
+
+const searchChangePage = (page) => {
+    localStorage.setItem("page", page);
+    searchShortId();
 }
