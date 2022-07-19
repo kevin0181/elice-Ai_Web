@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken'); //npm i jsonwebtoken -> jwt 설치
 const secret = require('./../config/jwt-config');
 const shortId = require("../models/schemas/types/short-id");
+const nodeMailer = require("nodemailer");
 
 
 router.post("/signIn", asyncHandler(async (req, res, next) => {
@@ -69,6 +70,34 @@ router.post("/signUp", asyncHandler(async (req, res, next) => {
     })
 
 }));
+
+router.post("/:shortId/find", asyncHandler(async (req, res, next) => {
+    let shortId = req.params.shortId;
+    let user = await User.find({shortId});
+
+    let transporter = nodeMailer.createTransport({ // 이메일 보낼 사용자 정의하기.
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'dudspsdl123321@gmail.com',
+            pass: 'password',
+        },
+    });
+
+    let info = await transporter.sendMail({
+        from: `"WDMA Team" dudspsdl123321@gmail.com`,
+        to: user.email,
+        subject: 'WDMA Auth Number',
+        // text: generatedAuthNumber,
+        html: `<b>비밀번호 초기화</b>`,
+    });
+
+    console.log('Message sent: %s', info.messageId);
+
+
+}))
 
 const passwordHash = async (pw) => {
     return crypto.createHash("sha1").update(pw).digest("hex");
