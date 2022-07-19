@@ -88,15 +88,17 @@ router.post("/:shortId/find", asyncHandler(async (req, res, next) => {
             pass: 'bbqruwbkxybsadoj',
         },
     });
-
-    console.log(user);
+    const randomPassword = generateRandomPassword(); //랜덤한 수를 가져오고
+    const hashRandomPassword = passwordHash(randomPassword);
+    await User.findOneAndUpdate({shortId}, {
+        hashPassword: hashRandomPassword
+    })
 
     let info = await transporter.sendMail({
         from: `"WDMA Team" <${myEmail}>`,
         to: user.email,
         subject: 'WDMA Auth Number',
-        // text: generatedAuthNumber,
-        html: `<b>비밀번호 초기화</b>`,
+        html: `<b>초기화 비밀번호 : ${randomPassword}</b>`,
     });
 
     console.log('Message sent: %s', info.messageId);
@@ -108,5 +110,8 @@ const passwordHash = async (pw) => {
     return crypto.createHash("sha1").update(pw).digest("hex");
 }
 
+function generateRandomPassword() {
+    return Math.floor(Math.random() * (10 ** 8)).toString().padStart('0', 8);
+}
 
 module.exports = router;
