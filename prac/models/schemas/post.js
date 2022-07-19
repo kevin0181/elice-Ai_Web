@@ -7,7 +7,8 @@ module.exports = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        require: true
+        require: true,
+        index: true
     },
 }, {
     timestamps: true,  //생성 시간 및 document 수정 시간 또한 알려준다.

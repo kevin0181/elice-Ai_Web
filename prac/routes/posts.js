@@ -32,6 +32,13 @@ router.post('/', asyncHandler(async (req, res, next) => { // 게시글 작성
     }
 }));
 
+router.get("/:shortId/posts", asyncHandler(async (req, res, next) => { //user에따른 리스트 전달
+    const {shortId} = req.params;
+    const user = await User.find({shortId});
+    const posts = await Post.find({author: user}).populate('author');
+    res.json({posts, user});
+}))
+
 router.get("/", authMiddleware, async (req, res, next) => { //전체 게시글 목록을 전달해줌
     if (req.query.page < 1) {
         next("Please enter a number greater than 1"); //page가 0보다 작으면 오류
