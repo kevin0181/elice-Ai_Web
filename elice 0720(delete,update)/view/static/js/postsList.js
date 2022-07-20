@@ -37,23 +37,31 @@ const getList = () => {
     });
 }
 
-
+//삭제 버튼을 클릭하게 되면?
 const deletePost = (shortId) => {
-    console.log(shortId);
+
+    //가져온 shortId를 ajax로 사용하여 서버에 넘겨줍니다.
+    
+    //게시글 삭제 : 1번
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/posts/${shortId}/delete`,
         success: (res) => {
+            
+            //게시글 삭제 : 3번
             alert(res.result);
             getList();
         }
     });
 }
 
+//업데이트 버튼을 클릭하게 되면?
 const updatePost = (shortId) => {
 
+    //브라우저에 localStorage의 setItem을 사용하여 해당 게시글의 shortId를 저장합니다.
     window.localStorage.setItem("shortId", shortId);
 
+    //페이지 이동 -> updateEdit.html로 이동합니다.
     location.href = "/view/posts/updateEdit.html";
 
 }
