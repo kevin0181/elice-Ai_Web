@@ -26,7 +26,7 @@ const getList = () => {
                 <td>elice</td>
                 <td>
                     <button type="button" onclick="deletePost('${it.shortId}')" class="btn btn-outline-danger">delete</button>
-                    <button type="button" class="btn btn-outline-warning">update</button>
+                    <button type="button" onclick="updatePost('${it.shortId}')" class="btn btn-outline-warning">update</button>
                 </td>
                 </tr>`;
                 //listData에 데이터를 담아준 후, postsList라는 클래스에
@@ -48,4 +48,12 @@ const deletePost = (shortId) => {
             getList();
         }
     });
+}
+
+const updatePost = (shortId) => {
+
+    window.localStorage.setItem("shortId", shortId);
+
+    location.href = "/view/posts/updateEdit.html";
+
 }

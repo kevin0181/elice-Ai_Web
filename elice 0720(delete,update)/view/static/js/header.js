@@ -13,8 +13,8 @@ $(document).ready(() => {
         <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
     </ul>
     <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='./../user/login.html'">Login</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='./../user/signUp.html'">Sign-up</button>
+        <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/view/user/login.html'">Login</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/view/user/signUp.html'">Sign-up</button>
     </div>
 </header>`;
 

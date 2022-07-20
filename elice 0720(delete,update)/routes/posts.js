@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const { Post } = require("./../models/");
+const asyncHandler = require("./../utils/async-handler")
 
 const router = Router();
 
@@ -55,6 +56,51 @@ router.get("/:shortId/delete", async (req, res, next) => {
         next(e);
     }
 });
+
+
+router.get("/:shortId/find", async (req, res, next) => {
+    let { shortId } = req.params;
+
+    try {
+
+        let data = await Post.findOne({ shortId });
+
+        res.json(data);
+
+    } catch (e) {
+        next(e);
+    }
+});
+
+router.post("/:shortId/update", async (req, res, next) => {
+    let { shortId } = req.params;
+    let { title, content } = req.body;
+
+    console.log(shortId, title, content);
+
+    try {
+
+        await Post.updateOne({ shortId }, {
+            title,
+            content
+        });
+
+        res.json({
+            result: "수정이 완료되었습니다."
+        })
+
+    } catch (e) {
+        next(e);
+    }
+
+});
+
+
+
+
+
+
+
 
 
 module.exports = router;
