@@ -30,8 +30,10 @@ function App() {
     setList(getList);
   }
 
-  const successLine = () => {
-    
+  const successLine = (index) => {
+    const getList = [...list];
+    getList[index].status = true;
+    setList(getList);
   }
 
   return (
@@ -44,7 +46,7 @@ function App() {
         <ol>
           {
             list.map(it => (
-              <li key={it.index}>
+              <li key={it.index} className={it.status === true ? "complete" : ""}>
                 {it.text} &nbsp;&nbsp;&nbsp;&nbsp;
                 <button onClick={() => {
                   deleteLine(it.index)
