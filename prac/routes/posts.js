@@ -138,7 +138,7 @@ router.get('/delete/:shortId', async (req, res, next) => { //id에 맞는 게시
             shortId
         }).populate('author');
 
-        if (post.author.shortId !== req.query.shortId) {
+        if (post.author.shortId !== req.query.shortId) { //사용자 인증 부분
             next(new Error("Not Authorized"));
             return;
         }
