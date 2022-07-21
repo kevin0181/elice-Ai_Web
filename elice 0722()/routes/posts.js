@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const { Post } = require("./../models/");
 const asyncHandler = require("./../utils/async-handler") //try catch문을 사용하지 않고 오류처리 미들웨어를 사용할 수 있도록하는 함수입니다.
-const authMiddleware = require("./../utils/authMiddleware")
+
 
 const router = Router();
 
@@ -34,7 +34,7 @@ router.post("/", async (req, res, next) => {
 
 //게시글 리스트 : 2번
 //게시글 리스트를 가져오기 위해 '/posts/'를 get방식으로 라우팅 되어 접근하게 됩니다.
-router.get("/", authMiddleware, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     //Post스키마에 해당되는 document들을 find (전부 가져옴)
     const posts = await Post.find({});
     //가져온 데이터를 posts변수에 담아 json 형태로 응답합니다.
