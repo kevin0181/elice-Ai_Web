@@ -1,35 +1,58 @@
 import { useEffect, useState } from "react";
+import "./index.css";
 
 function App() {
 
-  const [list1, setList1] = useState([{
-    index: 0,
-    text: ""
-  }]);
+  const [list, setList] = useState([]);
 
   const [text, setText] = useState("");
 
   useEffect(() => {
-    console.log(list1);
-  }, [list1]);
+    console.log(list);
+  }, [list]);
 
   const insertData = () => {
-    setList1(
-      text
+    setText("");
+    setList(
+      [
+        ...list,
+        {
+          index: list.length,
+          text: text,
+          status: false
+        }
+      ]
     )
+  }
+
+  const deleteLine = (index) => {
+    const getList = list.filter((it) => it.index !== index);
+    setList(getList);
+  }
+
+  const successLine = () => {
+    
   }
 
   return (
     <div className="App">
-      <input type={"text"} onChange={(e) => {
+      <input type={"text"} value={text} onChange={(e) => {
         setText(e.target.value);
       }} />
       <input type={"button"} onClick={insertData} value="버튼" />
       <div id="container">
         <ol>
           {
-            list1.map(it => (
-              <></>
+            list.map(it => (
+              <li key={it.index}>
+                {it.text} &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={() => {
+                  deleteLine(it.index)
+                }}>삭제</button>
+                <button onClick={() => {
+                  successLine(it.index)
+                }}>완료</button>
+              </li>
             ))
           }
         </ol>
