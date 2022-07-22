@@ -29,7 +29,7 @@ const login = () => { //로그인 버튼을 클릭하면?
             console.log(res);
 
             //백엔드 즉, 서버에서 정상적으로 응답을 받았다면 토큰값을 쿠키에 보관합니다.
-            $.cookie("accessToken", res.accessToken, {expires: 1, path: '/'});
+            $.cookie("accessToken", res.accessToken, { expires: 1, path: '/' });
 
             //email과 name을 sessionStorage에 저장합니다.
             sessionStorage.setItem("email", res.email);
