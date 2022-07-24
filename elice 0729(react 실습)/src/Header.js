@@ -16,6 +16,11 @@ function Header() {
                                 <li><a href="#" className="text-white">롯데시네마</a></li>
                                 <li><a href="#" className="text-white">메가박스</a></li>
                             </ul>
+                            <h4 className="text-white">My Info</h4>
+                            <ul className="list-unstyled">
+                                <li><a href="#" className="text-danger">LogOut</a></li>
+                                <li><a href="#" className="text-primary">Info</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
