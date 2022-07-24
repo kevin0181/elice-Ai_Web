@@ -10,19 +10,26 @@ const Detail = () => {
                         <div className="card-body">
                             <h5 className="card-title">Movie Img</h5>
                             <p className="card-text">Img Example</p>
-                            <input type="text" className="form-control" id="title" name={"title"} placeholder="Input Img Url" />
                             <p className="card-text"><small className="text-muted">https://search.pstatic.net/common?type=o&size=174x246&q ...</small></p>
                         </div>
                     </div>
                     <div className="mb-3">
                         <label for="title" className="form-label">Title</label>
-                        <input type="text" className="form-control" id="title" name={"title"} placeholder="Movie Title" />
+                        <div className="card">
+                            <p className="card-body">
+                                제목
+                            </p>
+                        </div>
                     </div>
                     <div className="mb-3">
                         <label for="content" className="form-label">Content</label>
-                        <textarea className="form-control" id="content" name="content" rows="3"></textarea>
+                        <div className="card">
+                            <p className="card-body">
+                                내용
+                            </p>
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-outline-primary m-3">Create</button>
+                    <button type="button" class="btn btn-outline-primary m-3">Update</button>
                     <button type="button" class="btn btn-outline-danger">Back</button>
                 </form>
             </div>
