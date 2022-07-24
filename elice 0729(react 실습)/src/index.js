@@ -12,6 +12,7 @@ import ReviewDetail from "./ReviewDetail";
 import ReviewCreate from "./ReviewCreate";
 import Header from "./Header";
 import Footer from "./Footer";
+import ReviewUpdate from "./ReviewUpdate";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root")
@@ -26,7 +27,7 @@ root.render(
       </Route>
       <Route path="review/:id" element={<ReviewDetail />}>
       </Route>
-      <Route path="review/:id/update" element={<ReviewDetail />}>
+      <Route path="review/:id/update" element={<ReviewUpdate />}>
       </Route>
       <Route path="review/create" element={<ReviewCreate />}>
       </Route>
