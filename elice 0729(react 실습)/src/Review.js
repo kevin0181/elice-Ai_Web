@@ -36,7 +36,7 @@ const Review = () => {
                                             </div>
                                             <div className="card-body">
                                                 <h5 className="card-title">{it.title}</h5>
-                                                <p className="card-text">{it.contant.substring(0, ((it.contant).length / 2))}<br /><a className="detailA">...상세보기</a></p>
+                                                <p className="card-text">{it.contant.substring(0, ((it.contant).length / 2))}<br /><a href="#" className="detailA">...상세보기</a></p>
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <div className="btn-group">
                                                         <button type="button" className="btn btn-sm btn-outline-secondary">삭제</button>
