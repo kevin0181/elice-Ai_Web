@@ -63,7 +63,6 @@ router.post("/login", asyncHandler(async (req, res, next) => {
         })
         return;
     }
-
     jwt.sign({
         email: email,
         name: checkEmail.name
@@ -81,6 +80,7 @@ router.post("/login", asyncHandler(async (req, res, next) => {
             });
         }
     })
+
 
 
 
