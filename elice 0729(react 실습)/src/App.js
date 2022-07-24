@@ -1,8 +1,13 @@
 import { useState } from "react";
+import Login from "./pages/user/Login";
+import SignUp from "./pages/user/SignUp";
 
 function App() {
 
-  const [loginView, setLoginView] = useState(false);
+  const [view, setView] = useState({
+    login: false,
+    signUp: false
+  });
 
   return (
     <div className="App">
@@ -13,13 +18,31 @@ function App() {
               <h1 className="fw-light">Moview</h1>
               <p className="lead text-muted">리뷰하고 싶은 영화를 추가하고, 별점을 주세요.<br /> 또한 삭제 수정이 가능합니다.</p>
               <p>
-                <a href="#" className="btn btn-primary my-2">로그인</a>
+                <a href="#" onClick={() => {
+                  setView({
+                    login: true,
+                    signUp: false
+                  });
+                }} className="btn btn-primary my-2 m-1">로그인</a>
+                <a href="#" onClick={() => {
+                  setView({
+                    login: false,
+                    signUp: true
+                  });
+                }} className="btn btn-secondary my-2 m-1">회원가입</a>
               </p>
             </div>
           </div>
         </section>
         <>
-          
+          {
+            view.login ? (<Login />) : (<></>)
+          }
+        </>
+        <>
+          {
+            view.signUp ? (<SignUp />) : (<></>)
+          }
         </>
       </main>
     </div>
