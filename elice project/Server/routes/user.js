@@ -42,12 +42,7 @@ router.post("/login", asyncHandler(async (req, res, next) => {
     let hashPassword = passwordHash(password);
 
     const checkEmail = await User.findOne({ email });
-    if (checkEmail.status !== null || checkEmail.status !== undefined) {
-        if (checkEmail.status === true) {
-            console.log(`너 비밀번호 초기화했었으니깐, 
-            비밀번호만 ㅈㅐ생성하는 페이지로 리다이렉트`);
-        }
-    }
+    
     if (!checkEmail) {
         res.status(401);
         res.json({

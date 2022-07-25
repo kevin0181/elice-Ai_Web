@@ -1,11 +1,14 @@
 import axios from "axios";
 import url from "./../../data/serverUrl.json";
+import { useEffect, useState } from "react";
 
 const Login = ({ loginForm, loginFunc }) => {
 
     const loginButton = async () => {
         await axios.post(url.url + "/user/login", loginForm);
     }
+
+    const [errorMessage, setErrorMessage] = useState("");
 
     return (
         <div className="album">
@@ -21,19 +24,22 @@ const Login = ({ loginForm, loginFunc }) => {
                         <input type="password" value={loginForm.password}
                             onChange={loginFunc} className="form-control" name={"password"} id="password" />
                     </div>
+                    <div className="mb-3">
+                        <p className="text-danger">{errorMessage}</p>
+                    </div>
                     <div className="mb-3 form-check">
                         <input type="checkbox" className="form-check-input" id="idCheck" />
                         <label className="form-check-label" htmlFor="idCheck">Remember Me</label>
                     </div>
                     <button type="button" className="btn btn-primary" onClick={() => {
-                        console.log(123);
-                        loginButton().then(res => {
-                            alert(res);
+                        loginButton().catch((e) => {
+                            setErrorMessage(e.response.data.fail);
                         })
-                    }}>Login</button>
+                    }}
+                    >Login</button>
                 </form>
             </div>
-        </div>
+        </div >
     );
 }
 
