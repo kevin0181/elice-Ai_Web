@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./pages/user/Login";
 import SignUp from "./pages/user/SignUp";
 
@@ -9,9 +9,38 @@ function App() {
     signUp: false
   });
 
+  //props를 사용해서 구현.
   const [loginForm, setLoginForm] = useState({
-
+    email: "",
+    password: ""
   });
+
+  //props를 사용해서 구현.
+  const [signUpForm, setSignUpForm] = useState({
+    email: "",
+    password: "",
+    rePassword: "",
+    name: ""
+  });
+
+  const loginFunc = (e) => { //email과 패스워드 값을 받아오는 부분
+    setLoginForm({
+      ...loginForm,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const signUpFunc = (e) => { //회원가입 폼의 데이터를 받아오는 부분
+    setSignUpForm({
+      ...signUpForm,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  useEffect(() => { //useSate값이 변경되었을때마다 감지.
+    console.log(signUpForm);
+    // console.log(loginForm);
+  }, [signUpForm, loginForm]);
 
   return (
     <div className="App">
@@ -40,12 +69,12 @@ function App() {
         </section>
         <>
           {
-            view.login ? (<Login />) : (<></>)
+            view.login ? (<Login loginForm={loginForm} loginFunc={loginFunc} />) : (<></>)
           }
         </>
         <>
           {
-            view.signUp ? (<SignUp />) : (<></>)
+            view.signUp ? (<SignUp signUpForm={signUpForm} signUpFunc={signUpFunc} />) : (<></>)
           }
         </>
       </main>

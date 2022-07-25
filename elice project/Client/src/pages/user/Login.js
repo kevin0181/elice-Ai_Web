@@ -1,4 +1,4 @@
-const Login = () => {
+const Login = ({ loginForm, loginFunc }) => {
     return (
         <div className="album">
             <div className="container">
