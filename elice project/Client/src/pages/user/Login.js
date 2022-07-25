@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 const Login = ({ loginForm, loginFunc }) => {
 
     const loginButton = async () => {
-        await axios.post(url.url + "/user/login", loginForm);
+        return await axios.post(url.url + "/user/login", loginForm);
     }
-
 
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -34,7 +33,7 @@ const Login = ({ loginForm, loginFunc }) => {
                     </div>
                     <button type="button" className="btn btn-primary" onClick={() => {
                         loginButton().then((res) => {
-                            console.log(res)
+                            console.log(res.data);
                         }).catch((e) => {
                             setErrorMessage(e.response.data.fail);
                         })

@@ -8,7 +8,7 @@ function App() {
     login: false,
     signUp: false
   });
-
+  
   //props를 사용해서 구현.
   const [loginForm, setLoginForm] = useState({
     email: "",
