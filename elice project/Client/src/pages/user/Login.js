@@ -1,4 +1,12 @@
+import axios from "axios";
+import url from "./../../data/serverUrl.json";
+
 const Login = ({ loginForm, loginFunc }) => {
+
+    const loginButton = async () => {
+        await axios.post(url.url + "/user/login", { loginForm });
+    }
+
     return (
         <div className="album">
             <div className="container">
@@ -17,7 +25,11 @@ const Login = ({ loginForm, loginFunc }) => {
                         <input type="checkbox" className="form-check-input" id="idCheck" />
                         <label className="form-check-label" htmlFor="idCheck">Remember Me</label>
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="button" className="btn btn-primary" onClick={() => {
+                        loginButton().then(res => {
+                            alert(res);
+                        })
+                    }}>Login</button>
                 </form>
             </div>
         </div>
