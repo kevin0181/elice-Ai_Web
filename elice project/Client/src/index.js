@@ -3,8 +3,9 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 // import your route components too
-
 import App from "./App";
+
+import { CookiesProvider } from 'react-cookie';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root")
@@ -12,6 +13,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <BrowserRouter>
-    <App/>
+    <CookiesProvider>
+      <App />
+    </CookiesProvider>
   </BrowserRouter>
 );
