@@ -23,13 +23,13 @@ root.render(
     <Routes>
       <Route path="/" element={<App />}>
       </Route>
-      <Route path="review" element={<Review />}>
-      </Route>
-      <Route path="review/:id" element={<ReviewDetail />}>
-      </Route>
-      <Route path="review/:id/update" element={<ReviewUpdate />}>
-      </Route>
-      <Route path="review/create" element={<ReviewCreate />}>
+      <Route path="review">
+        <Route path="list" element={<Review />} />
+        <Route path="create" element={<ReviewCreate />} />
+        <Route path=":id">
+          <Route path="detail" element={<ReviewDetail />} />
+          <Route path="update" element={<ReviewUpdate />} />
+        </Route>
       </Route>
     </Routes>
     <Footer />
