@@ -8,6 +8,7 @@ const Login = ({ loginForm, loginFunc }) => {
         await axios.post(url.url + "/user/login", loginForm);
     }
 
+
     const [errorMessage, setErrorMessage] = useState("");
 
     return (
@@ -32,7 +33,9 @@ const Login = ({ loginForm, loginFunc }) => {
                         <label className="form-check-label" htmlFor="idCheck">Remember Me</label>
                     </div>
                     <button type="button" className="btn btn-primary" onClick={() => {
-                        loginButton().catch((e) => {
+                        loginButton().then((res) => {
+                            console.log(res)
+                        }).catch((e) => {
                             setErrorMessage(e.response.data.fail);
                         })
                     }}

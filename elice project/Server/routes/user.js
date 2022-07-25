@@ -42,7 +42,7 @@ router.post("/login", asyncHandler(async (req, res, next) => {
     let hashPassword = passwordHash(password);
 
     const checkEmail = await User.findOne({ email });
-    
+
     if (!checkEmail) {
         res.status(401);
         res.json({
@@ -74,9 +74,7 @@ router.post("/login", asyncHandler(async (req, res, next) => {
                 name: checkEmail.name
             });
         }
-    })
-
-
+    });
 
 
 }))
