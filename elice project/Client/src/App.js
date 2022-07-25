@@ -13,16 +13,8 @@ import Footer from "./Footer";
 import ReviewUpdate from "./ReviewUpdate";
 import Login from "./Login";
 
-import { useCookies } from 'react-cookie';
 
 function App() {
-
-  const [cookies, setCookie] = useCookies(['name']);
-
-  function onChange(newName) {
-    setCookie('name', newName, { path: '/' });
-  }
-
   return (
     <>
       <Header />

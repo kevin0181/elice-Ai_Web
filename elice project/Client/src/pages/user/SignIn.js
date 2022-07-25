@@ -1,6 +1,7 @@
 import axios from "axios";
 import url from "../../data/serverUrl.json";
 import { useEffect, useState } from "react";
+import { setCookie, getCookie } from "./../../util/cookie/cookie";
 
 const SignIn = ({ loginForm, loginFunc }) => {
 
@@ -34,9 +35,12 @@ const SignIn = ({ loginForm, loginFunc }) => {
                     <button type="button" className="btn btn-primary" onClick={() => {
                         loginButton().then((res) => {
                             console.log(res.data);
+                            setCookie("tokenData", res.data, { path: "/" });
                         }).catch((e) => {
                             setErrorMessage(e.response.data.fail);
-                        })
+                        }).finally(() => {
+                            console.log(getCookie("tokenData"));
+                        });
                     }}
                     >Login</button>
                 </form>

@@ -37,10 +37,10 @@ function Login() {
     })
   }
 
-  useEffect(() => { //useSate값이 변경되었을때마다 감지.
-    console.log(signUpForm);
-    // console.log(loginForm);
-  }, [signUpForm, loginForm]);
+  // useEffect(() => { //useSate값이 변경되었을때마다 감지.
+  //   console.log(signUpForm);
+  //   // console.log(loginForm);
+  // }, [signUpForm, loginForm]);
 
   return (
     <div>
