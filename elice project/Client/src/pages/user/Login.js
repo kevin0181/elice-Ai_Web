@@ -4,7 +4,7 @@ import url from "./../../data/serverUrl.json";
 const Login = ({ loginForm, loginFunc }) => {
 
     const loginButton = async () => {
-        await axios.post(url.url + "/user/login", { loginForm });
+        await axios.post(url.url + "/user/login", loginForm);
     }
 
     return (
@@ -26,6 +26,7 @@ const Login = ({ loginForm, loginFunc }) => {
                         <label className="form-check-label" htmlFor="idCheck">Remember Me</label>
                     </div>
                     <button type="button" className="btn btn-primary" onClick={() => {
+                        console.log(123);
                         loginButton().then(res => {
                             alert(res);
                         })

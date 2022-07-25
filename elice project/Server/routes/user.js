@@ -38,7 +38,7 @@ router.post("/signUp", asyncHandler(async (req, res, next) => {
 
 router.post("/login", asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
-
+    // console.log(email, password);
     let hashPassword = passwordHash(password);
 
     const checkEmail = await User.findOne({ email });
