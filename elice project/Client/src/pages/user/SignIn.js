@@ -1,8 +1,8 @@
 import axios from "axios";
-import url from "./../../data/serverUrl.json";
+import url from "../../data/serverUrl.json";
 import { useEffect, useState } from "react";
 
-const Login = ({ loginForm, loginFunc }) => {
+const SignIn = ({ loginForm, loginFunc }) => {
 
     const loginButton = async () => {
         return await axios.post(url.url + "/user/login", loginForm);
@@ -45,4 +45,4 @@ const Login = ({ loginForm, loginFunc }) => {
     );
 }
 
-export default Login;
+export default SignIn;
