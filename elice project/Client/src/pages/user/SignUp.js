@@ -1,4 +1,18 @@
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import url from "../../data/serverUrl.json";
+import { useState } from "react";
+
 const SignUp = ({ signUpForm, signUpFunc }) => {
+
+    const navigate = useNavigate();
+
+    const SignUpButton = async () => {
+        return await axios.post(url.url + "/user/signUp", signUpForm);
+    }
+
+    const [errorMessage, setErrorMessage] = useState("");
+
     return (
         <div className="album">
             <div className="container">
@@ -23,7 +37,20 @@ const SignUp = ({ signUpForm, signUpFunc }) => {
                         <input type="text" className="form-control" value={signUpForm.name} onChange={signUpFunc}
                             name={"name"} id="name" />
                     </div>
-                    <button type="submit" className="btn btn-primary">SignUp</button>
+                    <div className="mb-3">
+                        <p className="text-danger">{errorMessage}</p>
+                    </div>
+                    <button type="button"
+                        onClick={() => {
+                            SignUpButton().then(res => {
+                                console.log(res.data);
+                                alert(res.data.result);
+                            }).catch(e => {
+                                console.log(e);
+                                setErrorMessage(e.response.data.error);
+                            });
+                        }}
+                        className="btn btn-primary">SignUp</button>
                 </form>
             </div>
         </div>

@@ -8,7 +8,7 @@ const SignIn = ({ loginForm, loginFunc }) => {
 
     const navigate = useNavigate();
 
-    const loginButton = async () => {
+    const SignInButton = async () => {
         return await axios.post(url.url + "/user/login", loginForm);
     }
 
@@ -36,7 +36,7 @@ const SignIn = ({ loginForm, loginFunc }) => {
                         <label className="form-check-label" htmlFor="idCheck">Remember Me</label>
                     </div>
                     <button type="button" className="btn btn-primary" onClick={() => {
-                        loginButton().then((res) => {
+                        SignInButton().then((res) => {
                             setCookie("tokenData", res.data, { path: "/" });
                             alert("로그인 되었습니다.");
                             navigate("/review/list");
