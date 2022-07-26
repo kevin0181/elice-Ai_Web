@@ -1,13 +1,23 @@
-import { useEffect, useState } from "react";
-import { getCookie } from "./util/cookie/cookie";
+import { removeCookie } from "./util/cookie/cookie";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { logout } from './app/reducer/User';
+import { useSelector } from 'react-redux';
 
 function Header() {
 
-    const [loginCheck, setLoginCheck] = useState();
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log(getCookie("tokenData"));
-    },[]);
+    const dispatch = useDispatch(); // action 을 보내는 역할, 디스패치를 날리는 역할
+
+    const user = useSelector(state => state.user.value);
+
+    const onClickLogOut = () => {
+        removeCookie("tokenData");
+        dispatch(logout());
+        navigate("/");
+    }
 
     return (
         <header className="shadow-lg" style={{ position: 'fixed', width: '100%', zIndex: '1' }}>
@@ -27,10 +37,10 @@ function Header() {
                                 <li><a href="#" className="text-white">메가박스</a></li>
                             </ul>
                             {
-                                loginCheck ? (<>
+                                user.accessToken ? (<>
                                     <h4 className="text-white">My Info</h4>
                                     <ul className="list-unstyled">
-                                        <li><a href="#" className="text-danger">LogOut</a></li>
+                                        <li><a href="#" className="text-danger" onClick={onClickLogOut}>LogOut</a></li>
                                         <li><a href="#" className="text-primary">Info</a></li>
                                     </ul>
                                 </>) : (<>

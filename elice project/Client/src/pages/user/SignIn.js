@@ -5,7 +5,12 @@ import { setCookie } from "./../../util/cookie/cookie";
 import { useNavigate } from 'react-router-dom';
 import $ from "jquery";
 
+import { useDispatch } from 'react-redux';
+import { login } from './../../app/reducer/User';
+
 const SignIn = ({ loginForm, loginFunc }) => {
+
+    const dispatch = useDispatch(); // action 을 보내는 역할, 디스패치를 날리는 역할
 
     const navigate = useNavigate();
 
@@ -52,6 +57,7 @@ const SignIn = ({ loginForm, loginFunc }) => {
                     <button type="button" className="btn btn-primary" onClick={() => {
                         SignInButton().then((res) => {
                             setCookie("tokenData", res.data, { path: "/" });
+                            dispatch(login(res.data));
                             alert("로그인 되었습니다.");
                             navigate("/review/list");
                         }).catch((e) => {

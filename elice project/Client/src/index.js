@@ -7,8 +7,8 @@ import App from "./App";
 
 import { CookiesProvider } from 'react-cookie'; // react-cookie 라이브러리 설치
 
-// import store from './app/store'
-// import { Provider } from 'react-redux' // npm install @reduxjs/toolkit react-redux
+import Store from './app/Store'
+import { Provider } from 'react-redux' // npm install @reduxjs/toolkit react-redux
 
 const root = ReactDOM.createRoot(
   document.getElementById("root")
@@ -16,8 +16,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <BrowserRouter>
-    <CookiesProvider>
-      <App />
-    </CookiesProvider>
+    <Provider store={Store}>
+      <CookiesProvider>
+        <App />
+      </CookiesProvider>
+    </Provider>
   </BrowserRouter>
 );
