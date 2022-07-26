@@ -70,6 +70,10 @@ const Review = () => {
         navigate(`/review/${shortId}/update`);
     }
 
+    const onClickDetailReview = (shortId) => {
+        navigate(`/review/${shortId}/detail`);
+    }
+
     return (
         <>
             <main>
@@ -102,8 +106,12 @@ const Review = () => {
                                                     role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" />
                                             </div>
                                             <div className="card-body">
-                                                <h5 className="card-title">{it.title}</h5>
-                                                <p className="card-text">{it.content.substring(0, ((it.content).length / 2))}<br /><a href="#" className="detailA">...상세보기</a></p>
+                                                <h5 className="card-title" onClick={() => {
+                                                    onClickDetailReview(it.shortId)
+                                                }}>{it.title}</h5>
+                                                <p className="card-text">{it.content.substring(0, ((it.content).length / 2))}<br /><a onClick={() => {
+                                                    onClickDetailReview(it.shortId)
+                                                }} className="detailA">...상세보기</a></p>
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <div className="btn-group">
                                                         <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => {

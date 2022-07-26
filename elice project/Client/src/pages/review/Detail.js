@@ -1,36 +1,66 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import axios from 'axios';
+import url from "./../../data/serverUrl.json";
+import { useCookies } from 'react-cookie';
+
 const Detail = () => {
+
+    const params = useParams();
+
+    const [detailReviewData, setDetailReviewData] = useState({});
+    const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
+
+    // useEffect(() => { //파라미터의 id값을 가져옴
+    //     console.log(params);
+    // }, [params]);
+
+    const findDetailReviewData = async (shortId) => {
+        return await axios.get(url.url + `/posts/${shortId}/find`, {
+            headers: {
+                accessToken: cookies.tokenData.accessToken
+            }
+        })
+    }
+
+    useEffect(() => { //데이터 가져오기
+        findDetailReviewData(params.id).then((res) => {
+            setDetailReviewData(res.data);
+        })
+    }, [])
+
     return (
         <div className="album bg-light">
             <div className="container">
                 <form>
                     <div className="card mb-3">
                         <div className="card-img-top" style={{ textAlign: 'center' }}>
-                            <img src="https://search.pstatic.net/common?type=o&size=174x246&quality=100&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20220720_283%2F1658284839003UzxoT_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2" alt="..." />
+                            <img src={detailReviewData.url} alt="..." />
                         </div>
                         <div className="card-body">
                             <h5 className="card-title">Movie Img</h5>
-                            <p className="card-text">Img Example</p>
-                            <p className="card-text"><small className="text-muted">https://search.pstatic.net/common?type=o&size=174x246&q ...</small></p>
+                            <p className="card-text"><small className="text-muted">{detailReviewData.url}</small></p>
                         </div>
                     </div>
                     <div className="mb-3">
-                        <label for="title" className="form-label">Title</label>
+                        <label htmlFor="title" className="form-label">Title</label>
                         <div className="card">
                             <p className="card-body">
-                                제목
+                                {detailReviewData.title}
                             </p>
                         </div>
                     </div>
                     <div className="mb-3">
-                        <label for="content" className="form-label">Content</label>
+                        <label htmlFor="content" className="form-label">Content</label>
                         <div className="card">
                             <p className="card-body">
-                                내용
+                                {detailReviewData.content}
                             </p>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-primary m-3">Update</button>
-                    <button type="button" class="btn btn-outline-danger">Back</button>
+                    <button type="button" className="btn btn-outline-danger" onClick={() => {
+                        history.back();
+                    }}>Back</button>
                 </form>
             </div>
         </div>
