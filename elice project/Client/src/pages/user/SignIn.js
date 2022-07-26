@@ -3,12 +3,26 @@ import url from "../../data/serverUrl.json";
 import { useState } from "react";
 import { setCookie, getCookie } from "./../../util/cookie/cookie";
 import { useNavigate } from 'react-router-dom';
+import $ from "jquery";
 
 const SignIn = ({ loginForm, loginFunc }) => {
 
     const navigate = useNavigate();
 
     const SignInButton = async () => {
+
+        if (loginForm.email === "") {
+            alert("이메일을 입력해주세요.");
+            $("#email").focus();
+            return;
+        }
+
+        if (loginForm.password === "") {
+            alert("비밀번호를 입력해주세요.");
+            $("#password").focus();
+            return;
+        }
+
         return await axios.post(url.url + "/user/login", loginForm);
     }
 
