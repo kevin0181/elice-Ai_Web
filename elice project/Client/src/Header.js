@@ -13,7 +13,6 @@ function Header() {
         removeCookie("tokenData", { path: "/" });
         navigate("/");
     }
-    
     return (
         <header className="shadow-lg" style={{ position: 'fixed', width: '100%', zIndex: '1' }}>
             <div className="collapse bg-dark" id="navbarHeader">
