@@ -1,12 +1,43 @@
+// import data from "./data/review.json";//
+
 import { useEffect, useState } from "react";
-import data from "./data/review.json";
+
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import moment from 'moment';
+
+import url from "./data/serverUrl.json";
 
 const Review = () => {
 
     const navigate = useNavigate();
 
-    const [reviewData, setReviewData] = useState(data); //리뷰 데이터 가져옴
+    // const [reviewData, setReviewData] = useState(data); //리뷰 데이터 가져옴 (초반에 데이터 가져올때)
+
+    const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
+
+    const [reviewData, setReviewData] = useState([]);
+
+    useEffect(() => {
+        console.log(reviewData)
+    }, [reviewData]);
+
+    const getReviewData = async () => {
+        return await axios.get(url.url + "/posts/", {
+            headers: {
+                accessToken: cookies.tokenData.accessToken
+            }
+        })
+    }
+
+    useEffect(() => { //데이터 가져옴
+
+        getReviewData().then(res => {
+            setReviewData(res.data);
+        })
+
+    }, []);
 
     return (
         <>
@@ -36,18 +67,18 @@ const Review = () => {
                                         <div className="card shadow-sm">
                                             <div className="card-img-top" style={{ textAlign: 'center' }}>
                                                 <img className="bd-placeholder-img " width="50%" height="225"
-                                                    src={it.img}
+                                                    src={it.url}
                                                     role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" />
                                             </div>
                                             <div className="card-body">
                                                 <h5 className="card-title">{it.title}</h5>
-                                                <p className="card-text">{it.contant.substring(0, ((it.contant).length / 2))}<br /><a href="#" className="detailA">...상세보기</a></p>
+                                                <p className="card-text">{it.content.substring(0, ((it.content).length / 2))}<br /><a href="#" className="detailA">...상세보기</a></p>
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <div className="btn-group">
                                                         <button type="button" className="btn btn-sm btn-outline-secondary">삭제</button>
                                                         <button type="button" className="btn btn-sm btn-outline-secondary">수정</button>
                                                     </div>
-                                                    <small className="text-muted">9 mins</small>
+                                                    <small className="text-muted">{moment(it.createdAt).format("YYYY-MM-DD HH:mm:ss")}</small>
                                                 </div>
                                             </div>
                                         </div>
