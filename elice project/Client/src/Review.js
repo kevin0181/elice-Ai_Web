@@ -78,7 +78,8 @@ const Review = () => {
                                                         <button type="button" className="btn btn-sm btn-outline-secondary">삭제</button>
                                                         <button type="button" className="btn btn-sm btn-outline-secondary">수정</button>
                                                     </div>
-                                                    <small className="text-muted">{moment(it.updatedAt).format("YYYY-MM-DD HH:mm:ss")}</small>
+                                                    <small className="text-muted"></small>
+                                                    <small className="text-muted">작성자 : {it.author.name} &nbsp; |{moment(it.updatedAt).format("YYYY-MM-DD HH:mm:ss")}|</small>
                                                 </div>
                                             </div>
                                         </div>
