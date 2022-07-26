@@ -31,7 +31,7 @@ const Review = () => {
     }, [reviewData]);
 
     const getReviewData = async () => {
-        return await axios.get(url.url + "/posts/", {
+        return await axios.get(url.url + "/posts?page=1&perPage=6", {
             headers: {
                 accessToken: cookies.tokenData.accessToken
             }
@@ -97,7 +97,7 @@ const Review = () => {
                     <div className="container">
 
                         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            {
+                            {/* {
                                 reviewData.map((it, index) => (
                                     <div className="col" key={index}>
                                         <div className="card shadow-sm">
@@ -128,7 +128,7 @@ const Review = () => {
                                         </div>
                                     </div>
                                 ))
-                            }
+                            } */}
                         </div>
                     </div>
                 </div>
