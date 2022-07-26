@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { logout } from './app/reducer/User';
 import { useSelector } from 'react-redux';
+import { useEffect } from "react";
 
 function Header() {
 
@@ -13,10 +14,21 @@ function Header() {
 
     const user = useSelector(state => state.user.value);
 
+    useEffect(() => {
+        if (user.accessToken === "") {
+            alert("로그인을 해주세요.");
+            navigate("/");
+        }
+    }, [user]);
+
     const onClickLogOut = () => {
         removeCookie("tokenData");
         dispatch(logout());
         navigate("/");
+    }
+
+    const onClickLoginButton = () => {
+        window.location.reload();
     }
 
     return (
@@ -37,7 +49,7 @@ function Header() {
                                 <li><a href="#" className="text-white">메가박스</a></li>
                             </ul>
                             {
-                                user.accessToken ? (<>
+                                user.accessToken !== "" ? (<>
                                     <h4 className="text-white">My Info</h4>
                                     <ul className="list-unstyled">
                                         <li><a href="#" className="text-danger" onClick={onClickLogOut}>LogOut</a></li>
@@ -46,7 +58,7 @@ function Header() {
                                 </>) : (<>
                                     <h4 className="text-white">My Info</h4>
                                     <ul className="list-unstyled">
-                                        <li><a href="#" className="text-primary">Login</a></li>
+                                        <li><a href="#" className="text-primary" onClick={onClickLoginButton}>Login</a></li>
                                     </ul>
                                 </>)
                             }
