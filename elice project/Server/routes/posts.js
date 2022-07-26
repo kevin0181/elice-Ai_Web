@@ -10,7 +10,7 @@ const router = Router();
 //게시글이 작성되면 post형식의
 // '/posts/' 에 해당하는 url이 라우팅되어 접근
 router.post("/", async (req, res, next) => {
-    const { title, content, email } = req.body;
+    const { title, content, url, email } = req.body;
     console.log(title, content, email);
     //formData에서 req.body를 통해 들어온 title, content를 가져옴
     try {
@@ -22,6 +22,7 @@ router.post("/", async (req, res, next) => {
         await Post.create({
             title,
             content,
+            url,
             author: authData
         });
 

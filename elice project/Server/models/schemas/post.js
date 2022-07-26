@@ -5,6 +5,7 @@ module.exports = new Schema({
     shortId,
     title: String,
     content: String,
+    url: String,
     author: {
         type: Schema.Types.ObjectId,
         ref: "User",
