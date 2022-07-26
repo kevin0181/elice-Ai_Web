@@ -1,4 +1,11 @@
+import { useEffect, useState } from "react";
+import { getCookie } from "./util/cookie/cookie";
+
 function Header() {
+    const [loginCheck, setLoginCheck] = useState(getCookie("tokenData"));
+    useEffect(() => {
+        console.log(loginCheck);
+    }, [loginCheck]);
     return (
         <header className="shadow-lg" style={{ position: 'fixed', width: '100%', zIndex: '1' }}>
             <div className="collapse bg-dark" id="navbarHeader">

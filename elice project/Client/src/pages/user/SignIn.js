@@ -1,7 +1,7 @@
 import axios from "axios";
 import url from "../../data/serverUrl.json";
 import { useState } from "react";
-import { setCookie, getCookie } from "./../../util/cookie/cookie";
+import { setCookie } from "./../../util/cookie/cookie";
 import { useNavigate } from 'react-router-dom';
 import $ from "jquery";
 
