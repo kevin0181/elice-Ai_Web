@@ -9,6 +9,12 @@ function Header() {
 
     const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
 
+    useEffect(() => {
+        if (cookies.tokenData === undefined) { //로그인 안되어있으면 로그인페이지로 리다이렉트
+            navigate("/");
+        }
+    }, [cookies])
+
     const onClickLogOut = () => {
         removeCookie("tokenData", { path: "/" });
         navigate("/");
