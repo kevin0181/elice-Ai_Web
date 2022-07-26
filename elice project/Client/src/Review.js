@@ -65,6 +65,11 @@ const Review = () => {
         }
     }
 
+    const onClickUpdateReview = (shortId) => {
+        dispatch(setData(shortId));
+        navigate(`/review/${shortId}/update`);
+    }
+
     return (
         <>
             <main>
@@ -104,7 +109,9 @@ const Review = () => {
                                                         <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => {
                                                             onClickDeleteReview(it.shortId);
                                                         }}>삭제</button>
-                                                        <button type="button" className="btn btn-sm btn-outline-secondary">수정</button>
+                                                        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => {
+                                                            onClickUpdateReview(it.shortId);
+                                                        }}>수정</button>
                                                     </div>
                                                     <small className="text-muted">작성자 : {it.author.name} &nbsp; |{moment(it.updatedAt).format("YYYY-MM-DD HH:mm:ss")}|</small>
                                                 </div>
