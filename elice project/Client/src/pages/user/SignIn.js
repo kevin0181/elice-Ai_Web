@@ -1,9 +1,12 @@
 import axios from "axios";
 import url from "../../data/serverUrl.json";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { setCookie, getCookie } from "./../../util/cookie/cookie";
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = ({ loginForm, loginFunc }) => {
+
+    const navigate = useNavigate();
 
     const loginButton = async () => {
         return await axios.post(url.url + "/user/login", loginForm);
@@ -34,13 +37,12 @@ const SignIn = ({ loginForm, loginFunc }) => {
                     </div>
                     <button type="button" className="btn btn-primary" onClick={() => {
                         loginButton().then((res) => {
-                            console.log(res.data);
                             setCookie("tokenData", res.data, { path: "/" });
+                            alert("로그인 되었습니다.");
+                            navigate("/review/list");
                         }).catch((e) => {
                             setErrorMessage(e.response.data.fail);
-                        }).finally(() => {
-                            console.log(getCookie("tokenData"));
-                        });
+                        })
                     }}
                     >Login</button>
                 </form>
