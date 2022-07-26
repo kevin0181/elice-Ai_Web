@@ -40,7 +40,9 @@ function Header() {
                                 </>) : (<>
                                     <h4 className="text-white">My Info</h4>
                                     <ul className="list-unstyled">
-                                        <li><a href="#" className="text-primary">Login</a></li>
+                                        <li><a href="#" className="text-primary" onClick={() => {
+                                            navigate("/");
+                                        }}>Login</a></li>
                                     </ul>
                                 </>)
                             }

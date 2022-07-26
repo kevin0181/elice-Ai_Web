@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import data from "./data/review.json";
+import { useNavigate } from "react-router-dom";
 
 const Review = () => {
+
+    const navigate = useNavigate();
 
     const [reviewData, setReviewData] = useState(data); //리뷰 데이터 가져옴
 
@@ -14,7 +17,9 @@ const Review = () => {
                             <h1 className="fw-light">Movie</h1>
                             <p className="lead text-muted">리뷰하고 싶은 영화를 추가하고, 별점을 주세요.<br /> 또한 삭제 수정이 가능합니다.</p>
                             <p>
-                                <a href="#" className="btn btn-primary my-2">Create Review</a>
+                                <button className="btn btn-primary my-2" onClick={() => {
+                                    navigate("/review/create");
+                                }}>Create Review</button>
                                 {/* <a href="#" className="btn btn-secondary my-2"></a> */}
                             </p>
                         </div>

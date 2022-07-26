@@ -15,15 +15,15 @@ const Create = () => {
                         </div>
                     </div>
                     <div className="mb-3">
-                        <label for="title" className="form-label">Title</label>
+                        <label htmlFor="title" className="form-label">Title</label>
                         <input type="text" className="form-control" id="title" name={"title"} placeholder="Movie Title" />
                     </div>
                     <div className="mb-3">
-                        <label for="content" className="form-label">Content</label>
+                        <label htmlFor="content" className="form-label">Content</label>
                         <textarea className="form-control" id="content" name="content" rows="3"></textarea>
                     </div>
-                    <button type="button" class="btn btn-outline-primary m-3">Create</button>
-                    <button type="button" class="btn btn-outline-danger">Back</button>
+                    <button type="button" className="btn btn-outline-primary m-3">Create</button>
+                    <button type="button" className="btn btn-outline-danger">Back</button>
                 </form>
             </div>
         </div>
