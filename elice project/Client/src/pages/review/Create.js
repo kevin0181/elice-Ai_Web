@@ -3,8 +3,11 @@ import $ from "jquery";
 import axios from "axios";
 import url from "./../../data/serverUrl.json";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
+
+    const navigate = useNavigate();
 
     const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
 
@@ -15,9 +18,9 @@ const Create = () => {
         email: cookies.tokenData.email
     });
 
-    useEffect(() => {
-        console.log(review);
-    }, [review]);
+    // useEffect(() => {
+    //     console.log(review);
+    // }, [review]);
 
     const onChangeReview = (e) => {
         setReview({
@@ -86,7 +89,8 @@ const Create = () => {
                     <button type="button"
                         onClick={() => {
                             onClickCreateButton().then((res) => {
-                                console.log(res);
+                                alert(res.data.result);
+                                navigate("/review/list");
                             }).catch(e => {
                                 console.log(e);
                             });
