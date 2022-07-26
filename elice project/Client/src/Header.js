@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { getCookie } from "./util/cookie/cookie";
 
 function Header() {
-    const [loginCheck, setLoginCheck] = useState(getCookie("tokenData"));
+
+    const [loginCheck, setLoginCheck] = useState();
+
     useEffect(() => {
-        console.log(loginCheck);
-    }, [loginCheck]);
+        console.log(getCookie("tokenData"));
+    },[]);
+
     return (
         <header className="shadow-lg" style={{ position: 'fixed', width: '100%', zIndex: '1' }}>
             <div className="collapse bg-dark" id="navbarHeader">
@@ -23,11 +26,20 @@ function Header() {
                                 <li><a href="#" className="text-white">롯데시네마</a></li>
                                 <li><a href="#" className="text-white">메가박스</a></li>
                             </ul>
-                            <h4 className="text-white">My Info</h4>
-                            <ul className="list-unstyled">
-                                <li><a href="#" className="text-danger">LogOut</a></li>
-                                <li><a href="#" className="text-primary">Info</a></li>
-                            </ul>
+                            {
+                                loginCheck ? (<>
+                                    <h4 className="text-white">My Info</h4>
+                                    <ul className="list-unstyled">
+                                        <li><a href="#" className="text-danger">LogOut</a></li>
+                                        <li><a href="#" className="text-primary">Info</a></li>
+                                    </ul>
+                                </>) : (<>
+                                    <h4 className="text-white">My Info</h4>
+                                    <ul className="list-unstyled">
+                                        <li><a href="#" className="text-primary">Login</a></li>
+                                    </ul>
+                                </>)
+                            }
                         </div>
                     </div>
                 </div>
