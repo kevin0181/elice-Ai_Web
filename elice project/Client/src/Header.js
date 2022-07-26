@@ -1,21 +1,19 @@
-import { removeCookie } from "./util/cookie/cookie";
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { logout } from './app/reducer/User';
-import { useSelector } from 'react-redux';
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 function Header() {
 
     const navigate = useNavigate();
 
-    const dispatch = useDispatch(); // action 을 보내는 역할, 디스패치를 날리는 역할
-
-    const user = useSelector(state => state.user.value);
+    const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
+    useEffect(() => {
+        console.log(cookies.tokenData);
+    }, [cookies]);
 
     const onClickLogOut = () => {
-        removeCookie("tokenData");
-        dispatch(logout());
+        removeCookie("tokenData", { path: "/" });
         navigate("/");
     }
 
@@ -37,7 +35,7 @@ function Header() {
                                 <li><a href="#" className="text-white">메가박스</a></li>
                             </ul>
                             {
-                                user.accessToken ? (<>
+                                cookies.tokenData ? (<>
                                     <h4 className="text-white">My Info</h4>
                                     <ul className="list-unstyled">
                                         <li><a href="#" className="text-danger" onClick={onClickLogOut}>LogOut</a></li>
