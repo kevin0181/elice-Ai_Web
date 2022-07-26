@@ -8,15 +8,12 @@ function Header() {
     const navigate = useNavigate();
 
     const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
-    useEffect(() => {
-        console.log(cookies.tokenData);
-    }, [cookies]);
 
     const onClickLogOut = () => {
         removeCookie("tokenData", { path: "/" });
         navigate("/");
     }
-
+    
     return (
         <header className="shadow-lg" style={{ position: 'fixed', width: '100%', zIndex: '1' }}>
             <div className="collapse bg-dark" id="navbarHeader">
