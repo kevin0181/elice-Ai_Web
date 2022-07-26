@@ -14,22 +14,27 @@ import Footer from "./Footer";
 import ReviewUpdate from "./ReviewUpdate";
 import Login from "./Login";
 
+import Store from "./app/Store";
+import { Provider } from 'react-redux';
+
 function App() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="review">
-          <Route path="list" element={<Review />} />
-          <Route path="create" element={<ReviewCreate />} />
-          <Route path=":id">
-            <Route path="detail" element={<ReviewDetail />} />
-            <Route path="update" element={<ReviewUpdate />} />
+      <Provider store={Store}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="review">
+            <Route path="list" element={<Review />} />
+            <Route path="create" element={<ReviewCreate />} />
+            <Route path=":id">
+              <Route path="detail" element={<ReviewDetail />} />
+              <Route path="update" element={<ReviewUpdate />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
-      <Footer />
+        </Routes>
+        <Footer />
+      </Provider>
     </>
   );
 }

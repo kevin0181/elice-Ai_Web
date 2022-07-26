@@ -9,7 +9,13 @@ import moment from 'moment';
 
 import url from "./data/serverUrl.json";
 
+import { useDispatch } from 'react-redux';
+import { setData } from './app/reducer/Data';
+
+
 const Review = () => {
+
+    const dispatch = useDispatch(); // action 을 보내는 역할, 디스패치를 날리는 역할
 
     const navigate = useNavigate();
 
@@ -38,6 +44,26 @@ const Review = () => {
         })
 
     }, []);
+
+    const deleteReviewData = async (shortId) => {
+        return await axios.get(url.url + `/posts/${shortId}/delete`, {
+            headers: {
+                accessToken: cookies.tokenData.accessToken
+            }
+        });
+    }
+
+    const onClickDeleteReview = (shortId) => {
+        if (confirm("삭제 하시겠습니까?")) {
+            deleteReviewData(shortId).then((res) => {
+                // alert(res.data.result);
+                let getNewData = reviewData.filter(it => it.shortId !== shortId);
+                setReviewData(getNewData);
+            })
+        } else {
+            return;
+        }
+    }
 
     return (
         <>
@@ -75,10 +101,11 @@ const Review = () => {
                                                 <p className="card-text">{it.content.substring(0, ((it.content).length / 2))}<br /><a href="#" className="detailA">...상세보기</a></p>
                                                 <div className="d-flex justify-content-between align-items-center">
                                                     <div className="btn-group">
-                                                        <button type="button" className="btn btn-sm btn-outline-secondary">삭제</button>
+                                                        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => {
+                                                            onClickDeleteReview(it.shortId);
+                                                        }}>삭제</button>
                                                         <button type="button" className="btn btn-sm btn-outline-secondary">수정</button>
                                                     </div>
-                                                    <small className="text-muted"></small>
                                                     <small className="text-muted">작성자 : {it.author.name} &nbsp; |{moment(it.updatedAt).format("YYYY-MM-DD HH:mm:ss")}|</small>
                                                 </div>
                                             </div>
