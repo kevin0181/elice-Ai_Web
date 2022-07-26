@@ -10,32 +10,32 @@ const router = Router();
 //게시글이 작성되면 post형식의
 // '/posts/' 에 해당하는 url이 라우팅되어 접근
 router.post("/", async (req, res, next) => {
-    const { title, content, url, email } = req.body;
-    console.log(title, content, email);
-    //formData에서 req.body를 통해 들어온 title, content를 가져옴
-    try {
-
-        const authData = await User.findOne({ email });
-
-        //Post에 해당하는 스키마에 create 함수를 실행하고,
-        //title과 content를 넣음.
-        await Post.create({
-            title,
-            content,
-            url,
-            author: authData
-        });
-
-        //에러가 나지 않고 정상적으로 저장이 되면 
-        //응답을 json 형태로 보내줍니다.
-        res.json({
-            result: '저장이 완료되었습니다.'
-        })
-
-    } catch (e) {
-        //에러가 발생 할 경우, 오류 처리 미들웨어로 넘겨줍니다.
-        next(e);
+    if (req.query.page < 1) {
+        next("Please enter a number greater than 1"); //page가 0보다 작으면 오류
+        return;
     }
+
+    const page =
+        Number(req.query.page || 1);
+
+    if (page > req.query.perPage) {
+        next("Please enter a number greater than by page"); //perPage가 더크면 오류
+        return;
+    }
+
+    const perPage =
+        Number(req.query.perPage || 10);
+
+    const total = await Post.countDocuments({});
+    const posts = await Post.find({})
+        .sort({createdAt: -1})      //마지막으로 작성 된 게시글을 첫번째 인덱스로
+        .skip(perPage * (page - 1))
+        .limit(perPage)
+        .populate('author');
+    const totalPage =
+        Math.ceil(total / perPage);
+
+    res.json({posts, totalPage});
 })
 
 //게시글 리스트 : 2번

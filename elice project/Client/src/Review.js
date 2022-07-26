@@ -26,7 +26,8 @@ const Review = () => {
     const [reviewData, setReviewData] = useState([]);
 
     useEffect(() => {
-        console.log(reviewData)
+        console.log(reviewData);
+        console.log(cookies.tokenData.accessToken)
     }, [reviewData]);
 
     const getReviewData = async () => {
