@@ -25,7 +25,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="review">
-            <Route path="list" element={<Review />} />
+            <Route path="list" element={<Review />} >
+              <Route path=":id" element={<Review />} />
+            </Route>
             <Route path="create" element={<ReviewCreate />} />
             <Route path=":id">
               <Route path="detail" element={<ReviewDetail />} />

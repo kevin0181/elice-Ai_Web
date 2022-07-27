@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import moment from 'moment';
@@ -15,6 +15,8 @@ import { setData } from './app/reducer/Data';
 
 const Review = () => {
 
+    const params = useParams();
+
     const dispatch = useDispatch(); // action 을 보내는 역할, 디스패치를 날리는 역할
 
     const navigate = useNavigate();
@@ -24,12 +26,16 @@ const Review = () => {
     const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
 
     const [reviewData, setReviewData] = useState([]); //review data list
-    const [totalPage, setTotalPage] = useState(0); //totalPage
+
+    const [page, setPage] = useState({
+        totalPage: 0,
+        page: 0
+    }); //totalPage
 
     useEffect(() => {
         console.log(reviewData);
-        console.log(totalPage);
-    }, [reviewData]);
+        console.log(page);
+    }, [page]);
 
     const getReviewData = async () => {
         return await axios.get(url.url + "/posts?page=1&perPage=6", {
@@ -39,11 +45,20 @@ const Review = () => {
         })
     }
 
-    useEffect(() => { //데이터 가져옴
+    useEffect(() => { //렌더링 시, 한번 실행.
 
-        getReviewData().then(res => {
+        let pageId = 1;
+
+        if (params.id !== undefined) {
+            pageId = Number(params.id);
+        }
+
+        getReviewData().then(res => { // review Data를 가져오는 부분
             setReviewData(res.data.posts);
-            setTotalPage(res.data.totalPage);
+            setPage({
+                page: pageId,
+                totalPage: res.data.totalPage
+            });
         })
 
     }, []);
