@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import moment from 'moment';
@@ -14,8 +14,6 @@ import { setData } from './app/reducer/Data';
 
 
 const Review = () => {
-
-    const params = useParams();
 
     const dispatch = useDispatch(); // action 을 보내는 역할, 디스패치를 날리는 역할
 
@@ -29,7 +27,7 @@ const Review = () => {
 
     const [page, setPage] = useState({
         totalPage: 0,
-        page: 0
+        page: 1
     }); //totalPage
 
     useEffect(() => {
@@ -37,36 +35,37 @@ const Review = () => {
         console.log(page);
     }, [page]);
 
-    const getReviewData = async () => {
-        return await axios.get(url.url + "/posts?page=1&perPage=6", {
-            headers: {
-                accessToken: cookies.tokenData.accessToken
-            }
-        })
-    }
-
     useEffect(() => { //렌더링 시, 한번 실행.
 
-        let pageId = 1;
-
-        if (params.id !== undefined) { //파라미터에서 id값이 없는 경우
-            pageId = Number(params.id);
-        }
-
-        if (pageId < 1) { // 1페이지보다 낮게는 못가게 막음
-            pageId = 1;
-        }
-
-        getReviewData().then(res => { // review Data를 가져오는 부분
+        getReviewData(page.page).then(res => { // review Data를 가져오는 부분
             setReviewData(res.data.posts);
             setPage({
-                page: pageId,
+                ...page,
                 totalPage: res.data.totalPage
             });
         })
 
     }, []);
 
+    const onClickPagination = (page) => {
+        getReviewData(page).then(res => { // review Data를 가져오는 부분
+            setReviewData(res.data.posts);
+            setPage({
+                page: page,
+                totalPage: res.data.totalPage
+            });
+        });
+    }
+
+    const getReviewData = async (page) => {
+        return await axios.get(url.url + `/posts?page=${page}&perPage=6`, {
+            headers: {
+                accessToken: cookies.tokenData.accessToken
+            }
+        })
+    }
+
+    //----------------------------------------------------------------------
     const deleteReviewData = async (shortId) => {
         return await axios.get(url.url + `/posts/${shortId}/delete`, {
             headers: {
@@ -160,9 +159,15 @@ const Review = () => {
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li className="page-item"><a className="page-link" href="#">{page.page - 1}</a></li>
-                            <li className="page-item"><a className="page-link" href="#">{page.page}</a></li>
-                            <li className="page-item"><a className="page-link" href="#">{page.page + 1}</a></li>
+                            <li className="page-item"><a className="page-link" onClick={() => {
+                                onClickPagination((page.page - 1))
+                            }}>{page.page - 1}</a></li>
+                            <li className="page-item"><a className="page-link" onClick={() => {
+                                onClickPagination(page.page)
+                            }}>{page.page}</a></li>
+                            <li className="page-item"><a className="page-link" onClick={() => {
+                                onClickPagination((page.page + 1))
+                            }}>{page.page + 1}</a></li>
                             <li className="page-item">
                                 <a className="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
