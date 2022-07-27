@@ -25,7 +25,23 @@ const Review = () => {
 
     const [reviewData, setReviewData] = useState([]); //review data list
 
-    // const [userSearchEmail,setUserSearch]
+    const [userSearchEmail, setUserSearch] = useState("");
+
+    const onClickSearchButton = async () => { //email 검색 버튼
+
+        await axios.get(url.url + `/posts/search/${userSearchEmail}`, {
+            headers: {
+                accessToken: cookies.tokenData.accessToken
+            }
+        }).then((res) => {
+            setReviewData(res.data.posts);
+            setPage({
+                ...page,
+                totalPage: res.data.totalPage
+            });
+        })
+
+    }
 
     const [page, setPage] = useState({
         totalPage: 0,
@@ -35,7 +51,8 @@ const Review = () => {
     useEffect(() => {
         console.log(reviewData);
         console.log(page.page);
-    }, [page]);
+        console.log(userSearchEmail);
+    }, [userSearchEmail]);
 
     useEffect(() => { //렌더링 시, 한번 실행.
 
@@ -115,13 +132,15 @@ const Review = () => {
                     </div>
                 </section>
                 <div className="container">
-                    <div class="row g-3" style={{ justifyContent: 'end' }}>
-                        <div class="col-auto">
-                            <input type="text" id="nameSearch" placeholder="작성자를 검색하세요."
-                                class="form-control" />
+                    <div className="row g-3" style={{ justifyContent: 'end' }}>
+                        <div className="col-auto">
+                            <input type="text" id="nameSearch" onChange={(e) => {
+                                setUserSearch(e.target.value);
+                            }} value={userSearchEmail} placeholder="작성자를 검색하세요."
+                                className="form-control" />
                         </div>
-                        <div class="col-auto">
-                            <button className="btn btn-primary">검색</button>
+                        <div className="col-auto">
+                            <button className="btn btn-primary" onClick={onClickSearchButton}>검색</button>
                         </div>
                     </div>
                 </div>

@@ -70,7 +70,7 @@ router.get("/", async (req, res, next) => {
     res.json({ posts, totalPage });
 });
 
-router.get("/search/:email", async (req, res, next) => {
+router.get("/search/:email", async (req, res, next) => { //email을 검색하여 가져옴
 
     const { email } = req.params;
 
