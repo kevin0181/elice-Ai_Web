@@ -32,7 +32,7 @@ const Review = () => {
 
     useEffect(() => {
         console.log(reviewData);
-        console.log(page);
+        console.log(page.page);
     }, [page]);
 
     useEffect(() => { //렌더링 시, 한번 실행.
@@ -154,25 +154,41 @@ const Review = () => {
                 <div style={{ textAlign: "center" }}>
                     <nav aria-label="Page navigation example" style={{ display: "inline-block" }}>
                         <ul className="pagination">
-                            <li className="page-item">
-                                <a className="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li className="page-item"><a className="page-link" onClick={() => {
-                                onClickPagination((page.page - 1))
-                            }}>{page.page - 1}</a></li>
+
+                            {
+                                (page.page - 1) < 1 ? (<>
+                                </>) : (<>
+                                    <li className="page-item">
+                                        <a className="page-link" onClick={() => {
+                                            onClickPagination((page.page - 1))
+                                        }} aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li className="page-item"><a className="page-link" onClick={() => {
+                                        onClickPagination((page.page - 1))
+                                    }}>{page.page - 1}</a></li>
+                                </>)
+                            }
                             <li className="page-item"><a className="page-link" onClick={() => {
                                 onClickPagination(page.page)
                             }}>{page.page}</a></li>
-                            <li className="page-item"><a className="page-link" onClick={() => {
-                                onClickPagination((page.page + 1))
-                            }}>{page.page + 1}</a></li>
-                            <li className="page-item">
-                                <a className="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
+
+                            {
+                                (page.page + 1) > page.totalPage ? (<></>) : (<>
+                                    <li className="page-item"><a className="page-link" onClick={() => {
+                                        onClickPagination((page.page + 1))
+                                    }}>{page.page + 1}</a></li>
+                                    <li className="page-item">
+                                        <a className="page-link" onClick={() => {
+                                            onClickPagination((page.page + 1))
+                                        }} aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </>)
+                            }
+
                         </ul>
                     </nav>
                 </div>
