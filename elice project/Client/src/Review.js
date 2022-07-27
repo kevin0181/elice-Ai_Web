@@ -23,11 +23,12 @@ const Review = () => {
 
     const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
 
-    const [reviewData, setReviewData] = useState([]);
+    const [reviewData, setReviewData] = useState([]); //review data list
+    const [totalPage, setTotalPage] = useState(0); //totalPage
 
     useEffect(() => {
         console.log(reviewData);
-        console.log(cookies.tokenData.accessToken)
+        console.log(totalPage);
     }, [reviewData]);
 
     const getReviewData = async () => {
@@ -41,7 +42,8 @@ const Review = () => {
     useEffect(() => { //데이터 가져옴
 
         getReviewData().then(res => {
-            setReviewData(res.data);
+            setReviewData(res.data.posts);
+            setTotalPage(res.data.totalPage);
         })
 
     }, []);
@@ -97,7 +99,7 @@ const Review = () => {
                     <div className="container">
 
                         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            {/* {
+                            {
                                 reviewData.map((it, index) => (
                                     <div className="col" key={index}>
                                         <div className="card shadow-sm">
@@ -128,7 +130,7 @@ const Review = () => {
                                         </div>
                                     </div>
                                 ))
-                            } */}
+                            }
                         </div>
                     </div>
                 </div>
