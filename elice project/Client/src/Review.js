@@ -112,7 +112,17 @@ const Review = () => {
                         </div>
                     </div>
                 </section>
-
+                <div className="container">
+                    <div class="row g-3" style={{ justifyContent: 'end' }}>
+                        <div class="col-auto">
+                            <input type="text" id="nameSearch" placeholder="작성자를 검색하세요."
+                                class="form-control" />
+                        </div>
+                        <div class="col-auto">
+                            <button className="btn btn-primary">검색</button>
+                        </div>
+                    </div>
+                </div>
                 <div className="album py-5">
                     <div className="container">
                         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
