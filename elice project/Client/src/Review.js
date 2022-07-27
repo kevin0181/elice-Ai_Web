@@ -25,6 +25,8 @@ const Review = () => {
 
     const [reviewData, setReviewData] = useState([]); //review data list
 
+    // const [userSearchEmail,setUserSearch]
+
     const [page, setPage] = useState({
         totalPage: 0,
         page: 1
