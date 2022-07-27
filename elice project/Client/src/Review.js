@@ -49,7 +49,7 @@ const Review = () => {
 
         let pageId = 1;
 
-        if (params.id !== undefined) {
+        if (params.id !== undefined) { //파라미터에서 id값이 없는 경우
             pageId = Number(params.id);
         }
 
@@ -110,9 +110,8 @@ const Review = () => {
                     </div>
                 </section>
 
-                <div className="album py-5 bg-light">
+                <div className="album py-5">
                     <div className="container">
-
                         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             {
                                 reviewData.map((it, index) => (
@@ -148,6 +147,25 @@ const Review = () => {
                             }
                         </div>
                     </div>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                    <nav aria-label="Page navigation example" style={{ display: "inline-block" }}>
+                        <ul className="pagination">
+                            <li className="page-item">
+                                <a className="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li className="page-item"><a className="page-link" href="#">1</a></li>
+                            <li className="page-item"><a className="page-link" href="#">2</a></li>
+                            <li className="page-item"><a className="page-link" href="#">3</a></li>
+                            <li className="page-item">
+                                <a className="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </main>
         </>
