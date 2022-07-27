@@ -66,7 +66,9 @@ const Create = () => {
                 <form>
                     <div className="card mb-3">
                         <div className="card-img-top" style={{ textAlign: 'center' }}>
-                            <img src="https://search.pstatic.net/common?type=o&size=174x246&quality=100&direct=true&src=https%3A%2F%2Fs.pstatic.net%2Fmovie.phinf%2F20220720_283%2F1658284839003UzxoT_JPEG%2Fmovie_image.jpg%3Ftype%3Dw640_2" alt="..." />
+                            {
+                                review.url !== "" ? (<img src={review.url} alt="..." />) : (<></>)
+                            }
                         </div>
                         <div className="card-body">
                             <h5 className="card-title">Movie Img</h5>
