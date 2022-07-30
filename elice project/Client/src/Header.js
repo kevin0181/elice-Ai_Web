@@ -9,16 +9,28 @@ function Header() {
 
     const [cookies, setCookie, removeCookie] = useCookies(["tokenData"]);
 
-    useEffect(() => {
-        if (cookies.tokenData === undefined) { //로그인 안되어있으면 로그인페이지로 리다이렉트
-            navigate("/");
-        }
-    }, [cookies])
+    // useEffect(() => {
+    //     if (cookies.tokenData === undefined) { //로그인 안되어있으면 로그인페이지로 리다이렉트
+    //         navigate("/");
+    //     }
+    // }, [cookies]);
 
     const onClickLogOut = () => {
         removeCookie("tokenData", { path: "/" });
         navigate("/");
     }
+
+    // 카카오 스크립트
+    //OAuth.js
+    useEffect(() => {
+        console.log(new URL(window.location.href));
+    }, []);
+
+    const REST_API_KEY = "1cf2f1fcd0eb3df4344ed058e6f7da3e";
+    const REDIRECT_URI = "http://localhost:3000/auth/kakao/callback";
+
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
     return (
         <header className="shadow-lg" style={{ position: 'fixed', width: '100%', zIndex: '1' }}>
             <div className="collapse bg-dark" id="navbarHeader">
@@ -46,6 +58,13 @@ function Header() {
                                 </>) : (<>
                                     <h4 className="text-white">My Info</h4>
                                     <ul className="list-unstyled">
+                                        <a id="custom-login-btn" href={KAKAO_AUTH_URL}>
+                                            <img
+                                                src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+                                                width="222"
+                                                alt="카카오 로그인 버튼"
+                                            />
+                                        </a>
                                         <li><a href="#" className="text-primary" onClick={() => {
                                             navigate("/");
                                         }}>Login</a></li>

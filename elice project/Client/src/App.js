@@ -13,6 +13,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ReviewUpdate from "./ReviewUpdate";
 import Login from "./Login";
+import Social from "./pages/user/Social";
+import AuthSignUp from "./pages/user/AuthSignUp";
 
 import Store from "./app/Store";
 import { Provider } from 'react-redux';
@@ -24,6 +26,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="auth">
+            <Route path="kakao/callback" element={<Social />} />
+            <Route path="SignUp" element={<AuthSignUp />} />
+          </Route>
           <Route path="review">
             <Route path="list" element={<Review />} />
             <Route path="create" element={<ReviewCreate />} />

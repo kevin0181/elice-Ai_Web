@@ -25,6 +25,7 @@ const Review = () => {
 
     const [reviewData, setReviewData] = useState([]); //review data list
 
+<<<<<<< HEAD
     const [userSearchEmail, setUserSearch] = useState("");
 
     const onClickSearchButton = async () => { //email 검색 버튼
@@ -43,16 +44,25 @@ const Review = () => {
 
     }
 
+=======
+>>>>>>> 73c2be7 (왜안될까 페이지 넘길때 쿠키못읽음)
     const [page, setPage] = useState({
         totalPage: 0,
         page: 1
     }); //totalPage
 
+<<<<<<< HEAD
     useEffect(() => {
         console.log(reviewData);
         console.log(page.page);
         console.log(userSearchEmail);
     }, [userSearchEmail]);
+=======
+    // useEffect(() => {
+    //     console.log(reviewData);
+    //     console.log(page.page);
+    // }, [page]);
+>>>>>>> 73c2be7 (왜안될까 페이지 넘길때 쿠키못읽음)
 
     useEffect(() => { //렌더링 시, 한번 실행.
 
@@ -134,6 +144,7 @@ const Review = () => {
                 <div className="container">
                     <div className="row g-3" style={{ justifyContent: 'end' }}>
                         <div className="col-auto">
+<<<<<<< HEAD
                             <input type="text" id="nameSearch" onChange={(e) => {
                                 setUserSearch(e.target.value);
                             }} value={userSearchEmail} placeholder="작성자를 검색하세요."
@@ -141,6 +152,13 @@ const Review = () => {
                         </div>
                         <div className="col-auto">
                             <button className="btn btn-primary" onClick={onClickSearchButton}>검색</button>
+=======
+                            <input type="text" id="nameSearch" placeholder="작성자를 검색하세요."
+                                className="form-control" />
+                        </div>
+                        <div className="col-auto">
+                            <button className="btn btn-primary">검색</button>
+>>>>>>> 73c2be7 (왜안될까 페이지 넘길때 쿠키못읽음)
                         </div>
                     </div>
                 </div>
